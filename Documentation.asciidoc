@@ -1,0 +1,3 @@
+# Documentatie Memory project
+
+//TODO: write documentation
