@@ -7,15 +7,13 @@ Het project wordt in een groep uitgevoerd van 5 man groot.
 
 ### Deelnemers
 
-- Hoekstra, Jan Sietze
+:hardbreaks:
 
-- Meijer, Joost
-
-- Hooft, Emiel
-
-- Masselink, Tjebbe
-
-- Raven, Niek
+Hoekstra, Jan Sietze
+Meijer, Joost
+Hooft, Emiel
+Masselink, Tjebbe
+Raven, Niek
 
 ## Interview vragen
 
