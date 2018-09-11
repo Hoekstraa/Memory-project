@@ -12,7 +12,7 @@ Het project wordt in een groep uitgevoerd van 5 man groot.
 Hoekstra, Jan Sietze
 Meijer, Joost
 Hooft, Emiel
-Masselink, Tjebbe
+Masselink, Tjibbe
 Raven, Niek
 
 ## Interview vragen
