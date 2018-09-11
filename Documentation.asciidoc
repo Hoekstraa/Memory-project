@@ -17,11 +17,12 @@ Het project wordt in een groep uitgevoerd van 5 man groot.
 
 - Raven, Niek
 
-
-
 ## Interview vragen
 
 ## Planning
+
+Voor het project is 1 periode vastgesteld. Week 1-10 van het eerste schooljaar.
+De eerste 5 weken kunnen worden gebruikt voor planning etcetera en de 5 opvolgende weken voor het programmeren.
 
 ## Eisen en wensen
 
