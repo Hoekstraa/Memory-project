@@ -1,2 +1,4 @@
 # Memory-project
 Memory game - project first year HBO
+
+Documentation is available at link:Documentation/main.asciidoc[Documentation]
