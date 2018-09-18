@@ -70,3 +70,15 @@ In onderstaande lijst staan de eisen aan het memory spel.
 -	De huidige status van het spel moet worden vastgelegd in het tekstbestand ‘memory.sav’ (het spel wordt als het ware bevroren). De volgende aspecten van het spel moeten worden vastgelegd: status van de 16 kaarten, namen van de spelers, scores van de spelers, welke speler aan de beurt is;
 
 -	Terugladen van de opgeslagen bevroren status van het spel. Bij het terugladen van de bevroren status worden de kaarten teruggezet, de namen ingevuld, de scores ingevuld en welke speler aan de beurt was.
+
+## Definition of Done
+
+Een item is 'done' wanneer:
+
+- het door een teamgenoot gereviewed is
+
+- het getest is
+
+- het gedane werk omschreven staat in een user story
+
+- het gedocumenteerd is
