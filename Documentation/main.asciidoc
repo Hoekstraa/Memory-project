@@ -10,6 +10,8 @@ Hooft, Emiel
 Masselink, Tjibbe
 Raven, Niek
 
+B.A. Hensbergen - Productowner
+
 ## Projectomschrijving
 
 De bedoeling van dit project is het gaan opzetten van een Memory Game met de eisen en wensen van de klant.
