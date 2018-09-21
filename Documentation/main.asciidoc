@@ -43,51 +43,6 @@ telling/score: goed = plus slecht = min
 
 include::RequirementsAnalyse.asciidoc[]
 
-## Eisen en wensen
-
-### Eisen
-
-In onderstaande lijst staan de eisen aan het memory spel. 
-
-- Het speelveld bestaat uit 16 memory kaarten,
-deze zijn als 4 bij 4 kaarten zichtbaar;
-
-- De achterkant van de kaarten mag zelf gekozen worden.
-
-- De voorkant van de kaarten mag zelf gekozen worden.
-
-- Het scherm moet dynamisch (form onload) opgebouwd worden
-(niet 16 kaarten vooraf op het windows form plaatsen),
-maar eerst een hoofdmenu o.i.d;
-
-- Memory moet met 2 spelers gespeeld kunnen worden,
-beide spelers zijn ‘mens’ en spelen op hetzelfde bord/scherm
-(geen meerdere geopende instanties van het memory spel);
-
-- Bij het starten van het spel ziet de speler alle kaarten ‘op de kop’
-in een 4 bij 4 matrix;
-
-- De spelers kunnen hun namen ingeven in het scherm;
-
-- Er moet een knop zijn om het spel te resetten (herstarten).
-
-- Wanneer het spel is afgelopen,
-moeten de scores en namen van beide spelers worden opgeslagen
-en of de speler heeft verloren of gewonnen.
-
-- Vanuit het hoofdmenu moet er genavigeerd kunnen worden
-naar een pagina waar de highscores op te zien zijn
-
-- De huidige status van het spel moet worden vastgelegd
-in het tekstbestand ‘memory.sav’ (het spel wordt als het ware bevroren).
-De volgende aspecten van het spel moeten worden vastgelegd:
-status van de 16 kaarten, namen van de spelers, scores van de spelers,
-welke speler aan de beurt is;
-
-- Terugladen van de opgeslagen bevroren status van het spel.
-Bij het terugladen van de bevroren status worden de kaarten teruggezet,
-de namen ingevuld, de scores ingevuld en welke speler aan de beurt was.
-
 ## Definition of Done
 
 Een item is 'done' wanneer:
