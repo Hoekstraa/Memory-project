@@ -42,3 +42,19 @@ welke speler aan de beurt is;
 - Terugladen van de opgeslagen bevroren status van het spel.
 Bij het terugladen van de bevroren status worden de kaarten teruggezet,
 de namen ingevuld, de scores ingevuld en welke speler aan de beurt was.
+
+
+### MoSCoW analyse
+
+* Must Have
+** a
+** a
+* Should Have
+** a
+** a
+* Could Have
+** a
+** a
+* Won't have
+** a
+** a

@@ -29,7 +29,7 @@ Ze hebben toegang tot een tutor en een product owner voor hulp.
 Er is behoefte aan een digitaal memory spel, ontwikkeld door de projectgroep.
 Zie <<Eisen>> voor alle verplichte eigenschappen van het memory spel.
 
-### Planning
+## Planning
 
 Voor het project is 1 periode vastgesteld. 
 Week 1-10 van het eerste schooljaar.
@@ -39,15 +39,11 @@ We gaan werken met een scrum methode, elke week een gedeelte.
 De eisen worden elke week opgesplitst.
 Elke week is er een demo voor de productowner.
 
-#### Week 1
+### Week 1
 patience-achtig, 1 speler.
 telling/score: goed = plus slecht = min
 
-
-include::RequirementsAnalyse.asciidoc[]
-
-
-## Definition of Done
+### Definition of Done
 
 Een item is 'done' wanneer:
 
@@ -58,3 +54,15 @@ Een item is 'done' wanneer:
 - het gedane werk omschreven staat in een user story
 
 - het gedocumenteerd is
+
+include::RequirementsAnalyse.asciidoc[]
+
+include::Ontwerp.asciidoc[]
+
+## Hoe gebruiken wij Scrum in het project
+
+## Testen
+
+## Resultaat
+
+
