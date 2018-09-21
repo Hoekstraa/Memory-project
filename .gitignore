@@ -3,3 +3,4 @@ MemoryGame/obj
 *.swp
 .#*
 .*~
+Documentation/*.html
