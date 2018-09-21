@@ -1,49 +1,4 @@
-# Documentatie Memory Project
-
-### Groep
-
-[%hardbreaks]
-Hoekstra, Jan Sietze
-Meijer, Joost
-Hooft, Emiel
-Masselink, Tjibbe
-Raven, Niek
-
-B.A. Hensbergen - Productowner
-
-## Projectomschrijving
-
-De bedoeling van dit project is het gaan opzetten van een Memory Game met de eisen en wensen van de klant.
-Het project wordt in een groep van 5 man groot uitgevoerd.
-
-### Huidige situatie
-
-De projectgroep heeft de opdracht gekregen een memory spel te maken.
-Ze hebben toegang tot een tutor en een product owner voor hulp.
-
-### Probleemstelling
-
-Er is behoefte aan een digitaal memory spel, ontwikkeld door de projectgroep.
-Zie <<eisen>> voor alle verplichte eigenschappen van het memory spel.
-
-### Planning
-
-Voor het project is 1 periode vastgesteld. 
-Week 1-10 van het eerste schooljaar.
-De eerste 5 weken kunnen worden gebruikt voor planning etcetera en de 5 opvolgende weken voor het programmeren.
-
-We gaan werken met een scrum methode, elke week een gedeelte. 
-De eisen worden elke week opgesplitst.
-Elke week is er een demo voor de productowner.
-
-
-#### Week 1
-patience-achtig, 1 speler.
-telling/score: goed = plus slecht = min
-
-include::RequirementsAnalyse.asciidoc[]
-
-## Eisen en wensen
+## Requirementsanalyse
 
 ### Eisen
 
@@ -87,15 +42,3 @@ welke speler aan de beurt is;
 - Terugladen van de opgeslagen bevroren status van het spel.
 Bij het terugladen van de bevroren status worden de kaarten teruggezet,
 de namen ingevuld, de scores ingevuld en welke speler aan de beurt was.
-
-## Definition of Done
-
-Een item is 'done' wanneer:
-
-- het door een teamgenoot gereviewed is
-
-- het getest is
-
-- het gedane werk omschreven staat in een user story
-
-- het gedocumenteerd is
