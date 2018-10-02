@@ -64,5 +64,3 @@ include::Ontwerp.asciidoc[]
 ## Testen
 
 ## Resultaat
-
-
