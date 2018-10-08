@@ -7,35 +7,9 @@
         mc:Ignorable="d"
         Title="Memory Party" Height="600" Width="800">
   <Grid>
-    <Border Height="420" Width="420" VerticalAlignment="Top">
-      <Grid>
-	<Button Height="100" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top">Blue</Button>
-	<Button Height="100" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" >Green</Button>
-	<Button Height="100" Width="100" HorizontalAlignment="Left" VerticalAlignment="Bottom" >Purple</Button>
-	<Button Height="100" Width="100" HorizontalAlignment="Center" VerticalAlignment="Top" >Red</Button>
-	<Button Height="100" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" >Yellow</Button>
-	<Button Height="100" Width="100" HorizontalAlignment="Center" VerticalAlignment="Bottom" >Orange</Button>
-	<Button Height="100" Width="100" HorizontalAlignment="Right" VerticalAlignment="Top" >Cyan</Button>
-	<Button Height="100" Width="100" HorizontalAlignment="Right" VerticalAlignment="Center" >Pink</Button>
-	<Button Height="100" Width="100" HorizontalAlignment="Right" VerticalAlignment="Bottom" >
-	  <Button.Background>
-
-	  </Button.Background>
-	</Button>
-      </Grid>
-    </Border>
-    
-    <Border Height="50" Width="140" VerticalAlignment="Bottom">
-      <StackPanel Background="LightGray" Orientation="Horizontal">
-	<Button Width="140">
-	  <Button.ContextMenu>
-	    <ContextMenu>
-	      <MenuItem Header="1">First item </MenuItem>
-	    </ContextMenu>
-	  </Button.ContextMenu>
-	  Right-click me please? :3
-	</Button>
-      </StackPanel>
-    </Border>
-  </Grid>
+        <Border Height="500" Width="500" VerticalAlignment="Top">
+            <Grid Name="cardRoot">
+            </Grid>
+        </Border>
+    </Grid>
 </Window>
