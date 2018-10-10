@@ -1,32 +1,40 @@
 using System;
-using System.Collections.Generic;
 using System.Collections;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hashtables
 {
     partial class Program
     {
-        private static readonly Hashtable[] allCards = new Hashtable[] 
+        private static void Main(string[] args)
         {
-            NewCard(1), NewCard(2), NewCard(3), NewCard(4), NewCard(5), NewCard(6),
-            NewCard(7), NewCard(8), NewCard(9), NewCard(10), NewCard(11), NewCard(12),
-            NewCard(13), NewCard(14), NewCard(15), NewCard(16)
-        };
-
-        static void Main(string[] args)
-        {
-            Hashtable[,] game_board = MakeGameMatrix(Program.allCards);
-
-            Console.WriteLine(allCards.ToString());
-            PrintAllCards();
+            Hashtable[,] game_board = Matrix.Make(Card.allUnique);
+            
+            Card.PrintAll();
 
             Console.ReadKey();
         }
+    }
 
-        static Hashtable NewCard(int number)
+    partial class Card
+    {
+        public static readonly Hashtable[] allUnique = new Hashtable[]
+        {
+            Card.New(1), Card.New(1), Card.New(2), Card.New(2), Card.New(3), Card.New(3),
+            Card.New(4), Card.New(4), Card.New(5), Card.New(5), Card.New(6), Card.New(6),
+            Card.New(7), Card.New(7), Card.New(8), Card.New(8)
+        };
+        public static void PrintAll()
+        {
+            foreach (Hashtable table in Card.allUnique)
+            {
+                foreach (DictionaryEntry entry in table)
+                {
+                    Console.WriteLine($"{entry.Key} : {entry.Value}");
+                }
+            };
+        }
+
+        public static Hashtable New(int number)
         {
             return new Hashtable
             {
@@ -35,31 +43,23 @@ namespace Hashtables
                 { "Number", number }
             };
         }
+    }
 
-        static Hashtable[,] NewEmptyMatrix()
+    partial class Matrix
+    {
+        public static Hashtable[,] NewEmpty()
         {
-            return new Hashtable[,] { {},{},{},{} };
+            return new Hashtable[,] { { }, { }, { }, { } };
         }
 
-        static Hashtable[,] MakeGameMatrix(Hashtable[] allCards)
+        public static Hashtable[,] Make(Hashtable[] allCards)
         {
-            var empty_array = NewEmptyMatrix(); // Make new matrix
+            var empty_array = Matrix.NewEmpty(); // Make new matrix
             // Shuffle allCards
             // For each card in shuffled array
             //
-            var matrix = NewEmptyMatrix();
+            var matrix = Matrix.NewEmpty();
             return matrix;
-        }
-
-        static void PrintAllCards()
-        {
-            foreach(Hashtable table in allCards)
-            {
-                foreach(DictionaryEntry entry in table)
-                {
-                    Console.WriteLine($"{entry.Key} : {entry.Value}");
-                }
-            };
         }
     }
 }
