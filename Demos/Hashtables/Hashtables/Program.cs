@@ -3,11 +3,14 @@ using System.Collections;
 
 namespace Hashtables
 {
+    /// <summary>
+    /// Holds constants and readonly variables
+    /// </summary>
     partial class Constants
     {
         public const int height = 4;
         public const int width = 4;
-
+        
         public static readonly Hashtable[] allUnique = new Hashtable[]
         {
             Card.New(1), Card.New(1), Card.New(2), Card.New(2), Card.New(3), Card.New(3),
@@ -20,14 +23,24 @@ namespace Hashtables
     {
         private static void Main(string[] args)
         {
-            Hashtable[,] game_board = Matrix.Make(Constants.allUnique);
-
-            //Card.PrintAll();
+            Hashtable[,] game_board = Matrix.Make(Card.Shuffled(Constants.allUnique));
             Matrix.PrintToConsole(game_board);
+
+            for (int i = 0; i < 6; i++)
+            {
+                Console.Write("\n");
+                game_board = Matrix.Make(Card.Shuffled(Constants.allUnique));
+                Matrix.PrintToConsole(game_board);
+            }
+
+
             Console.ReadKey();
         }
     }
 
+    /// <summary>
+    /// Holds code related to cards
+    /// </summary>
     partial class Card
     {
         /// <summary>
@@ -58,8 +71,25 @@ namespace Hashtables
                 { "Number", number }
             };
         }
+
+        public static Hashtable[] Shuffled(Hashtable[] allCards)
+        {
+            var arr = allCards;
+            var rnd = new Random();
+            for (int i = 0; i < arr.Length - 1; i++)
+            {
+                var j = rnd.Next(i, arr.Length);
+                var temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+            return arr;
+        }
     }
 
+    /// <summary>
+    /// Holds code regarding matrices
+    /// </summary>
     partial class Matrix
     {
         /// <summary>
@@ -109,7 +139,7 @@ namespace Hashtables
                     //Logging
                     //Console.WriteLine($"{i}, {j}");
 
-                    Console.Write($"{matrix[i, j]["Number"]}");
+                    Console.Write($"{matrix[i, j]["Number"]} ");
                     if (j == 3)
                     {
                         Console.Write("\n");
