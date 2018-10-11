@@ -22,6 +22,17 @@ namespace Memory
     {
         public MainWindow()
         {
+            StateMachine machine = new StateMachine();
+            Logger logger = new Logger();
+            Game game = new Game();
+
+            machine.ModeChange += logger.HandleEvent;
+            machine.CardMatch += game.HandleEvent;
+            machine.SetMode(State.RUNNING);
+
+            // execute one tick to raise a sample event
+            machine.tick();
+
             InitializeComponent();
         }
     }
