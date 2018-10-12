@@ -4,57 +4,57 @@ using System.Collections;
 namespace Hashtables
 {
     /// <summary>
-    /// Holds constants and readonly variables
+    /// Start of the program, makes calls to functions to:
+    /// make a new shuffled matrix * 6 and print them out 1 by 1.
     /// </summary>
-    partial class Constants
-    {
-        public const int height = 4;
-        public const int width = 4;
-        
-        public static readonly Hashtable[] allUnique = new Hashtable[]
-        {
-            Card.New(1), Card.New(1), Card.New(2), Card.New(2), Card.New(3), Card.New(3),
-            Card.New(4), Card.New(4), Card.New(5), Card.New(5), Card.New(6), Card.New(6),
-            Card.New(7), Card.New(7), Card.New(8), Card.New(8)
-        };
-    }
-
-    partial class Program
+    internal class Program
     {
         private static void Main(string[] args)
         {
-            Hashtable[,] game_board = Matrix.Make(Card.Shuffled(Constants.allUnique));
-            Matrix.PrintToConsole(game_board);
+            var gameBoard = Matrix.Make(Card.Shuffled(Constants.AllUnique));
+            Matrix.PrintToConsole(gameBoard);
 
-            for (int i = 0; i < 6; i++)
+            for (var i = 0; i < 6; i++)
             {
                 Console.Write("\n");
-                game_board = Matrix.Make(Card.Shuffled(Constants.allUnique));
-                Matrix.PrintToConsole(game_board);
+                gameBoard = Matrix.Make(Card.Shuffled(Constants.AllUnique));
+                Matrix.PrintToConsole(gameBoard);
             }
-
 
             Console.ReadKey();
         }
     }
 
     /// <summary>
+    /// Holds constants and readonly variables
+    /// </summary>
+    internal class Constants
+    {
+        public const int Height = 4;
+        public const int Width = 4;
+
+        public static readonly Hashtable[] AllUnique =
+        {
+            Card.New(1), Card.New(1), Card.New(2), Card.New(2),
+            Card.New(3), Card.New(3), Card.New(4), Card.New(4),
+            Card.New(5), Card.New(5), Card.New(6), Card.New(6),
+            Card.New(7), Card.New(7), Card.New(8), Card.New(8)
+        };
+    }
+
+    /// <summary>
     /// Holds code related to cards
     /// </summary>
-    partial class Card
+    internal class Card
     {
         /// <summary>
-        /// Print all Cards in Constants.allUnique
+        /// Print all Cards in Constants.AllUnique
         /// </summary>
         public static void PrintAll()
         {
-            foreach (Hashtable table in Constants.allUnique)
-            {
+            foreach (var table in Constants.AllUnique)
                 foreach (DictionaryEntry entry in table)
-                {
                     Console.WriteLine($"{entry.Key} : {entry.Value}");
-                }
-            };
         }
 
         /// <summary>
@@ -72,11 +72,16 @@ namespace Hashtables
             };
         }
 
+        /// <summary>
+        /// Gets all cards and shuffles them inside a new array
+        /// </summary>
+        /// <param name="allCards"></param>
+        /// <returns>New shuffled hashtable array</returns>
         public static Hashtable[] Shuffled(Hashtable[] allCards)
         {
             var arr = allCards;
             var rnd = new Random();
-            for (int i = 0; i < arr.Length - 1; i++)
+            for (var i = 0; i < arr.Length - 1; i++)
             {
                 var j = rnd.Next(i, arr.Length);
                 var temp = arr[i];
@@ -90,31 +95,30 @@ namespace Hashtables
     /// <summary>
     /// Holds code regarding matrices
     /// </summary>
-    partial class Matrix
+    internal class Matrix
     {
         /// <summary>
-        /// Make a new 2d hashtable array with correct height/width
+        /// Make a new 2d hashtable array with correct Height/Width
         /// </summary>
         /// <returns>Empty matrix</returns>
         public static Hashtable[,] NewEmpty()
         {
-            return new Hashtable[Constants.height, Constants.width];
+            return new Hashtable[Constants.Height, Constants.Width];
         }
 
         /// <summary>
         /// Fill array with all cards
         /// </summary>
-        /// <param name="all cards"></param>
+        /// <param name="allCards"></param>
         /// <returns>matrix filled with cards</returns>
         public static Hashtable[,] Make(Hashtable[] allCards)
         {
             var matrix = Matrix.NewEmpty(); // Make new matrix
             // TODO: Shuffle allCards
-            int counter = 0;
+            var counter = 0;
 
-            for (int i = 0; i < Constants.width; i++)
-            {
-                for (int j = 0; j < Constants.height; j++)
+            for (var i = 0; i < Constants.Width; i++)
+                for (var j = 0; j < Constants.Height; j++)
                 {
                     //Logging
                     //Console.WriteLine($"{i}, {j}");
@@ -122,30 +126,24 @@ namespace Hashtables
                     matrix[i, j] = allCards[counter];
                     counter += 1;
                 }
-            }
+
             return matrix;
         }
 
         /// <summary>
-        /// Print matrix to console, in square
+        /// Print matrix to console, in a square
         /// </summary>
         /// <param name="matrix"></param>
         public static void PrintToConsole(Hashtable[,] matrix)
         {
-            for (int i = 0; i < Constants.width; i++)
-            {
-                for (int j = 0; j < Constants.height; j++)
+            for (var i = 0; i < Constants.Width; i++)
+                for (var j = 0; j < Constants.Height; j++)
                 {
-                    //Logging
-                    //Console.WriteLine($"{i}, {j}");
-
                     Console.Write($"{matrix[i, j]["Number"]} ");
+
                     if (j == 3)
-                    {
                         Console.Write("\n");
-                    }
                 }
-            }
         }
     }
 }
