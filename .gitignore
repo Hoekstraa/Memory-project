@@ -4,3 +4,4 @@ MemoryGame/obj
 .#*
 .*~
 Documentation/*.html
+.DS_Store
