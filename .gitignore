@@ -1,5 +1,6 @@
 .vs/
-MemoryGame/obj
+Memory-Game/Memory/obj
+Memory-Game/Memory/bin
 *.swp
 .#*
 .*~
