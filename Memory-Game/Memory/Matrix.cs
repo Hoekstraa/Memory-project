@@ -5,19 +5,19 @@ using System.Diagnostics;
 namespace Memory
 {
     /// <summary>
-    /// Holds code regarding matrices
+    ///     Holds code regarding matrices
     /// </summary>
     internal class Matrix
     {
         /// <summary>
-        /// Make a new 2d hashtable array with correct Height/Width
+        ///     Make a new 2d hashtable array with correct Height/Width
         /// </summary>
         /// <returns>Empty matrix</returns>
         public static Hashtable[,] NewEmpty
             => new Hashtable[Constant.Height, Constant.Width];
 
         /// <summary>
-        /// Fill array with all cards
+        ///     Fill array with all cards
         /// </summary>
         /// <param name="allCards"></param>
         /// <returns>matrix filled with cards</returns>
@@ -35,10 +35,12 @@ namespace Memory
                 matrix[i, j] = allCards[counter];
                 counter += 1;
             }
+
             return matrix;
         }
+
         /// <summary>
-        /// Print matrix to console, in a square
+        ///     Print matrix to console, in a square
         /// </summary>
         /// <param name="matrix"></param>
         public static void PrintToConsole(Hashtable[,] matrix)
@@ -47,8 +49,7 @@ namespace Memory
             for (var j = 0; j < Constant.Height; j++)
             {
                 Console.Write($"{matrix[i, j]["Number"]} ");
-                if (j == 3)
-                    Console.Write("\n");
+                if (j == 3) Console.Write("\n");
             }
         }
 
@@ -58,10 +59,8 @@ namespace Memory
             for (var j = 0; j < Constant.Height; j++)
             {
                 Trace.Write($"{matrix[i, j]["Number"]} ");
-                if (j == 3)
-                    Trace.WriteLine("");
+                if (j == 3) Trace.WriteLine("");
             }
         }
-
     }
 }

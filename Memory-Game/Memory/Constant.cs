@@ -3,12 +3,13 @@
 namespace Memory
 {
     /// <summary>
-    /// Holds constants and readonly variables
+    ///     Holds constants and readonly variables
     /// </summary>
     internal class Constant
     {
         public const int Height = 4;
         public const int Width = 4;
+
         public static readonly Hashtable[] AllUnique =
         {
             Card.New(1), Card.New(1), Card.New(2), Card.New(2),

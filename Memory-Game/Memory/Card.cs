@@ -5,20 +5,21 @@ using System.Linq;
 namespace Memory
 {
     /// <summary>
-    /// Holds code related to cards
+    ///     Holds code related to cards
     /// </summary>
     internal class Card
     {
         /// <summary>
-        /// Print all Cards in Constants.AllUnique
+        ///     Print all Cards in Constants.AllUnique
         /// </summary>
         public static void PrintAll()
         {
             foreach (var entry in Constant.AllUnique.SelectMany(table => table.Cast<DictionaryEntry>()))
                 Console.WriteLine($"{entry.Key} : {entry.Value}");
         }
+
         /// <summary>
-        /// Make new card hashtable with all data needed
+        ///     Make new card hashtable with all data needed
         /// </summary>
         /// <param name="number"></param>
         /// <returns></returns>
@@ -26,13 +27,14 @@ namespace Memory
         {
             return new Hashtable
             {
-                { "Flipped", false },
-                { "Image", new Uri($"file://{number}.png") },
-                { "Number", number }
+                {"Flipped", false},
+                {"Image", new Uri($"file://{number}.png")},
+                {"Number", number}
             };
         }
+
         /// <summary>
-        /// Gets all cards and shuffles them inside a new array
+        ///     Gets all cards and shuffles them inside a new array
         /// </summary>
         /// <param name="allCards"></param>
         /// <returns>New shuffled hashtable array</returns>
@@ -47,6 +49,7 @@ namespace Memory
                 arr[i] = arr[j];
                 arr[j] = temp;
             }
+
             return arr;
         }
     }
