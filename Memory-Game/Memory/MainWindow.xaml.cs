@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -45,8 +47,7 @@ namespace Memory
             for (var i = 0; i < 4; i++)
             for (var j = 0; j < 4; j++)
             {
-                var y = matrix[i, j]["Number"];
-                var x = CreateImage(i + 1);
+                var x = CreateImage(matrix[i, j]);
                 newGrid.Children.Add(x);
                 Grid.SetRow(x, j);
                 Grid.SetColumn(x, i);
@@ -96,7 +97,7 @@ namespace Memory
         /// </summary>
         /// <param name="number"></param>
         /// <returns>new image</returns>
-        private Image CreateImage(int number)
+        private Image CreateImage(Hashtable card)
         {
             var simpleImage = new Image {Width = 200, Margin = new Thickness(5)};
 
@@ -104,11 +105,7 @@ namespace Memory
 
             bi.BeginInit();
 
-            bi.UriSource = new Uri
-            (
-                $"Images/{number}.png",
-                UriKind.Relative
-            );
+            bi.UriSource = (Uri)card["Image"];
             //TODO: change file Uri
 
             bi.EndInit();

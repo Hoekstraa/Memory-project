@@ -28,7 +28,7 @@ namespace Memory
             return new Hashtable
             {
                 {"Flipped", false},
-                {"Image", new Uri($"file://Images/{number}.png")},
+                {"Image", new Uri($"Images/{number}.png", UriKind.Relative)},
                 {"Number", number}
             };
         }

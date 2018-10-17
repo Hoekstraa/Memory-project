@@ -24,7 +24,6 @@ namespace Memory
         public static Hashtable[,] Make(Hashtable[] allCards)
         {
             var matrix = NewEmpty; // Make new matrix
-            // TODO: Shuffle allCards
             var counter = 0;
             for (var i = 0; i < Constant.Width; i++)
             for (var j = 0; j < Constant.Height; j++)
@@ -49,10 +48,13 @@ namespace Memory
             for (var j = 0; j < Constant.Height; j++)
             {
                 Console.Write($"{matrix[i, j]["Number"]} ");
-                if (j == 3) Console.Write("\n");
+                if (j == 3) Console.WriteLine();
             }
         }
-
+        /// <summary>
+        ///     Print matrix to 'output', in a square
+        /// </summary>
+        /// <param name="matrix"></param>
         public static void TraceBoard(Hashtable[,] matrix)
         {
             for (var i = 0; i < Constant.Width; i++)
