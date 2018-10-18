@@ -103,10 +103,12 @@ namespace Memory
             return newGrid;
         }
 
-        private static void Btn_Click(object sender, RoutedEventArgs e)
+        private static void Btn_Click(object sender, RoutedEventArgs e)//, Grid cardGrid, Hashtable[,] gameBoard)
         {
-            //RevolveCard()
-            Trace.WriteLine(e.Source.GetType());
+            var row = System.Windows.Controls.Grid.GetRow((UIElement)e.OriginalSource);
+            var column = System.Windows.Controls.Grid.GetColumn((UIElement) e.OriginalSource);
+            //RevolveCard(row, column, gameBoard: gameBoard, cardGrid: cardGrid);
+            Trace.WriteLine($"{row}, {column}");
         }
 
         /// <summary>
