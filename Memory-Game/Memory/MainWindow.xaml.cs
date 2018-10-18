@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Diagnostics;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -19,20 +17,16 @@ namespace Memory
         /// </summary>
         public MainWindow()
         {
+            InitializeComponent();
             var gameBoard = Matrix.Make(Card.Shuffled(Constant.AllUnique));
             Matrix.TraceBoard(gameBoard);
-
-            var mainWindow = new Window {Title = "GAME! :D"};
             var rootGrid = new Grid {Name = "RootGrid"};
 
             //var hoofdmenu = new Grid();
             //rootGrid.Children.Add(hoofdmenu);
 
             rootGrid.Children.Add(FillCardGrid(gameBoard, GenerateCardGrid()));
-            mainWindow.Content = rootGrid;
-            mainWindow.Show();
-
-            //InitializeComponent();
+            MWindow.Content = rootGrid;
         }
 
         /// <summary>
@@ -41,7 +35,7 @@ namespace Memory
         /// <param name="matrix">Representation of gameboard in 2d array of hashtables</param>
         /// <param name="cardGrid">Grid to be filled with Images</param>
         /// <returns>New modified grid</returns>
-        private Grid FillCardGrid(Hashtable[,] matrix, Grid cardGrid)
+        private static Grid FillCardGrid(Hashtable[,] matrix, Grid cardGrid)
         {
             var newGrid = cardGrid;
             for (var i = 0; i < 4; i++)
@@ -61,7 +55,7 @@ namespace Memory
         /// </summary>
         /// <param name="grid">Grid to add columns to</param>
         /// <param name="amount">Amount of columns to be added</param>
-        private void AddColumns(Grid grid, int amount = 1)
+        private static void AddColumns(Grid grid, int amount = 1)
         {
             for (var i = 0; i < amount; i++)
                 grid.ColumnDefinitions.Add(new ColumnDefinition());
@@ -72,7 +66,7 @@ namespace Memory
         /// </summary>
         /// <param name="grid">Grid to add rows to</param>
         /// <param name="amount">Amount of rows to be added</param>
-        private void AddRows(Grid grid, int amount = 1)
+        private static void AddRows(Grid grid, int amount = 1)
         {
             for (var i = 0; i < amount; i++)
                 grid.RowDefinitions.Add(new RowDefinition());
@@ -95,9 +89,9 @@ namespace Memory
         /// <summary>
         ///     Returns Image based on the cardNumber
         /// </summary>
-        /// <param name="number"></param>
+        /// <param name="card"></param>
         /// <returns>new image</returns>
-        private Image CreateImage(Hashtable card)
+        private static Image CreateImage(IDictionary card)
         {
             var simpleImage = new Image {Width = 200, Margin = new Thickness(5)};
 
@@ -105,8 +99,8 @@ namespace Memory
 
             bi.BeginInit();
 
-            bi.UriSource = (Uri)card["Image"];
-            //TODO: change file Uri
+            bi.UriSource = (Uri) card["Image"];
+            //TODO: make it so that the imgs are copied to compiled folder
 
             bi.EndInit();
 

@@ -7,8 +7,4 @@
         mc:Ignorable="d"
         x:Name="MWindow"
         Title="MainWindow" Height="450" Width="800">
-
-    <Grid>
-
-    </Grid>
 </Window>
