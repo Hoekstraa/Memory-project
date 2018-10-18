@@ -9,9 +9,8 @@ namespace Memory
 {
     public class GameLogic
     {
-
         /// <summary>
-        ///     Revolves card in both
+        ///     Revolves card in both the gameboard and the UI grid
         /// </summary>
         /// <param name="row">row in gameboard</param>
         /// <param name="column">column in gameboard</param>
@@ -19,7 +18,7 @@ namespace Memory
         /// <param name="cardGrid">UI element to revolve card in</param>
         public static void RevolveCard(int row, int column, Hashtable[,] gameBoard, Grid cardGrid)
         {
-            Button btn = new Button();
+            var btn = new Button();
             Image x;
             if ((bool) gameBoard[row, column]["Flipped"])
             {
@@ -41,6 +40,13 @@ namespace Memory
             Grid.SetColumn(btn, column);
         }
 
+        /// <summary>
+        ///     Retrieves element where row = r and column = c
+        /// </summary>
+        /// <param name="g">grid</param>
+        /// <param name="r">row number</param>
+        /// <param name="c">column number</param>
+        /// <returns></returns>
         private static UIElement GetGridElement(Grid g, int r, int c)
         {
             for (var i = 0; i < g.Children.Count; i++)
@@ -63,24 +69,29 @@ namespace Memory
         {
             var newGrid = cardGrid;
             for (var i = 0; i < 4; i++)
-                for (var j = 0; j < 4; j++)
-                {
-                    var x = CreateImage(matrix[i, j], "Back");
-                    Button btn = new Button();
-                    btn.Content = x;
-                    btn.Click += Btn_Click;
-                    newGrid.Children.Add(btn);
-                    Grid.SetRow(btn, j);
-                    Grid.SetColumn(btn, i);
-                }
+            for (var j = 0; j < 4; j++)
+            {
+                var x = CreateImage(matrix[i, j], "Back");
+                var btn = new Button();
+                btn.Content = x;
+                btn.Click += Btn_Click;
+                newGrid.Children.Add(btn);
+                Grid.SetRow(btn, j);
+                Grid.SetColumn(btn, i);
+            }
 
             return newGrid;
         }
 
-        private static void Btn_Click(object sender, RoutedEventArgs e)//, Grid cardGrid, Hashtable[,] gameBoard)
+        /// <summary>
+        /// Gets row and column of clicked button and returns it to trace output
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private static void Btn_Click(object sender, RoutedEventArgs e) //, Grid cardGrid, Hashtable[,] gameBoard)
         {
-            var row = System.Windows.Controls.Grid.GetRow((UIElement) e.OriginalSource);
-            var column = System.Windows.Controls.Grid.GetColumn((UIElement) e.OriginalSource);
+            var row = Grid.GetRow((UIElement) e.OriginalSource);
+            var column = Grid.GetColumn((UIElement) e.OriginalSource);
             //RevolveCard(row, column, gameBoard: gameBoard, cardGrid: cardGrid);
             Trace.WriteLine($"{row}, {column}");
         }
@@ -113,7 +124,7 @@ namespace Memory
         /// <returns>New grid</returns>
         public static Grid GenerateCardGrid()
         {
-            var cardGrid = new Grid { Name = "CardGrid", ShowGridLines = true };
+            var cardGrid = new Grid {Name = "CardGrid", ShowGridLines = true};
 
             AddColumns(cardGrid, 4);
             AddRows(cardGrid, 4);
@@ -129,7 +140,7 @@ namespace Memory
         /// <returns>new image</returns>
         private static Image CreateImage(IDictionary card, string side)
         {
-            var simpleImage = new Image { Width = 200, Margin = new Thickness(5) };
+            var simpleImage = new Image {Width = 200, Margin = new Thickness(5)};
 
             var bi = new BitmapImage();
 
