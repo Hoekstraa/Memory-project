@@ -5,3 +5,5 @@ Memory-Game/Memory/bin
 .#*
 .*~
 Documentation/*.html
+.DS_Store
+*.cache
