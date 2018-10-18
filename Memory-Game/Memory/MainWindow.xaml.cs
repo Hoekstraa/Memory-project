@@ -24,9 +24,51 @@ namespace Memory
 
             //var hoofdmenu = new Grid();
             //rootGrid.Children.Add(hoofdmenu);
-
-            rootGrid.Children.Add(FillCardGrid(gameBoard, GenerateCardGrid()));
+            var cardGrid = FillCardGrid(gameBoard, GenerateCardGrid());
+            rootGrid.Children.Add(cardGrid);
             MWindow.Content = rootGrid;
+
+            RevolveCard(0,3,gameBoard, cardGrid);
+        }
+        /// <summary>
+        /// Revolves card in both
+        /// </summary>
+        /// <param name="row">row in gameboard</param>
+        /// <param name="column">column in gameboard</param>
+        /// <param name="gameBoard">gameboard to revolve card in</param>
+        /// <param name="cardGrid">UI element to revolve card in</param>
+        private void RevolveCard(int row, int column, Hashtable[,] gameBoard, Grid cardGrid)
+        {
+            Image x;
+            if ((bool) gameBoard[row, column]["Flipped"])
+            {
+                gameBoard[row, column]["Flipped"] = false;
+                x = CreateImage(gameBoard[row, column], "Back");
+            }
+            else
+            {
+                gameBoard[row, column]["Flipped"] = true;
+                x = CreateImage(gameBoard[row, column], "Front");
+            }
+
+
+            cardGrid.Children.Add(x);
+            cardGrid.Children.Remove(GetGridElement(cardGrid,row, column));
+            Grid.SetRow(x, row);
+            Grid.SetColumn(x, column);
+
+
+        }
+
+        UIElement GetGridElement(Grid g, int r, int c)
+        {
+            for (int i = 0; i < g.Children.Count; i++)
+            {
+                UIElement e = g.Children[i];
+                if (Grid.GetRow(e) == r && Grid.GetColumn(e) == c)
+                    return e;
+            }
+            return null;
         }
 
         /// <summary>
@@ -41,7 +83,7 @@ namespace Memory
             for (var i = 0; i < 4; i++)
             for (var j = 0; j < 4; j++)
             {
-                var x = CreateImage(matrix[i, j]);
+                var x = CreateImage(matrix[i, j], "Back");
                 newGrid.Children.Add(x);
                 Grid.SetRow(x, j);
                 Grid.SetColumn(x, i);
@@ -90,8 +132,9 @@ namespace Memory
         ///     Returns Image based on the cardNumber
         /// </summary>
         /// <param name="card"></param>
+        /// <param name="side">either back or front</param>
         /// <returns>new image</returns>
-        private static Image CreateImage(IDictionary card)
+        private static Image CreateImage(IDictionary card, string side)
         {
             var simpleImage = new Image {Width = 200, Margin = new Thickness(5)};
 
@@ -99,7 +142,7 @@ namespace Memory
 
             bi.BeginInit();
 
-            bi.UriSource = (Uri) card["Image"];
+            bi.UriSource = (Uri) card[side];
             //TODO: make it so that the imgs are copied to compiled folder
 
             bi.EndInit();
