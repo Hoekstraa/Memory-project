@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -28,10 +29,15 @@ namespace Memory
             rootGrid.Children.Add(cardGrid);
             MWindow.Content = rootGrid;
 
-            RevolveCard(0,3,gameBoard, cardGrid);
+            RevolveCard(0, 3, gameBoard, cardGrid);
+            RevolveCard(0, 3, gameBoard, cardGrid);
+            RevolveCard(2, 1, gameBoard, cardGrid);
+            RevolveCard(1, 2, gameBoard, cardGrid);
+            RevolveCard(3, 0, gameBoard, cardGrid);
         }
+
         /// <summary>
-        /// Revolves card in both
+        ///     Revolves card in both
         /// </summary>
         /// <param name="row">row in gameboard</param>
         /// <param name="column">column in gameboard</param>
@@ -39,35 +45,37 @@ namespace Memory
         /// <param name="cardGrid">UI element to revolve card in</param>
         private void RevolveCard(int row, int column, Hashtable[,] gameBoard, Grid cardGrid)
         {
+            Button btn = new Button();
             Image x;
             if ((bool) gameBoard[row, column]["Flipped"])
             {
                 gameBoard[row, column]["Flipped"] = false;
                 x = CreateImage(gameBoard[row, column], "Back");
+                btn.Content = x;
             }
             else
             {
                 gameBoard[row, column]["Flipped"] = true;
                 x = CreateImage(gameBoard[row, column], "Front");
+                btn.Content = x;
             }
 
-
-            cardGrid.Children.Add(x);
-            cardGrid.Children.Remove(GetGridElement(cardGrid,row, column));
-            Grid.SetRow(x, row);
-            Grid.SetColumn(x, column);
-
-
+            btn.Click += Btn_Click;
+            cardGrid.Children.Add(btn);
+            cardGrid.Children.Remove(GetGridElement(cardGrid, row, column));
+            Grid.SetRow(btn, row);
+            Grid.SetColumn(btn, column);
         }
 
-        UIElement GetGridElement(Grid g, int r, int c)
+        private UIElement GetGridElement(Grid g, int r, int c)
         {
-            for (int i = 0; i < g.Children.Count; i++)
+            for (var i = 0; i < g.Children.Count; i++)
             {
-                UIElement e = g.Children[i];
+                var e = g.Children[i];
                 if (Grid.GetRow(e) == r && Grid.GetColumn(e) == c)
                     return e;
             }
+
             return null;
         }
 
@@ -84,12 +92,21 @@ namespace Memory
             for (var j = 0; j < 4; j++)
             {
                 var x = CreateImage(matrix[i, j], "Back");
-                newGrid.Children.Add(x);
-                Grid.SetRow(x, j);
-                Grid.SetColumn(x, i);
+                Button btn = new Button();
+                btn.Content = x;
+                btn.Click += Btn_Click;
+                newGrid.Children.Add(btn);
+                Grid.SetRow(btn, j);
+                Grid.SetColumn(btn, i);
             }
 
             return newGrid;
+        }
+
+        private static void Btn_Click(object sender, RoutedEventArgs e)
+        {
+            //RevolveCard()
+            Trace.WriteLine(e.Source.GetType());
         }
 
         /// <summary>
