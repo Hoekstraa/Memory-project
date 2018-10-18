@@ -2,3 +2,8 @@
 Memory game - project first year HBO
 
 Documentation is available at link:Documentation/main.asciidoc[Documentation]
+
+## This branch
+
+This specific branch contains 2 demos, one built on the base project, one on a console solution.
+See the folder `demos` for the second.
