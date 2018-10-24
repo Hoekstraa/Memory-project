@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,7 +21,7 @@ namespace Memory
         {
             var btn = new Button();
             Image x;
-            if ((bool) gameBoard[row, column]["Flipped"])
+            if ((bool)gameBoard[row, column]["Flipped"])
             {
                 gameBoard[row, column]["Flipped"] = false;
                 x = CreateImage(gameBoard[row, column], "Back");
@@ -69,16 +70,16 @@ namespace Memory
         {
             var newGrid = cardGrid;
             for (var i = 0; i < 4; i++)
-            for (var j = 0; j < 4; j++)
-            {
-                var x = CreateImage(matrix[i, j], "Back");
-                var btn = new Button();
-                btn.Content = x;
-                btn.Click += Btn_Click;
-                newGrid.Children.Add(btn);
-                Grid.SetRow(btn, j);
-                Grid.SetColumn(btn, i);
-            }
+                for (var j = 0; j < 4; j++)
+                {
+                    var x = CreateImage(matrix[i, j], "Back");
+                    var btn = new Button();
+                    btn.Content = x;
+                    btn.Click += Btn_Click;
+                    newGrid.Children.Add(btn);
+                    Grid.SetRow(btn, j);
+                    Grid.SetColumn(btn, i);
+                }
 
             return newGrid;
         }
@@ -90,10 +91,10 @@ namespace Memory
         /// <param name="e"></param>
         private static void Btn_Click(object sender, RoutedEventArgs e) //, Grid cardGrid, Hashtable[,] gameBoard)
         {
-            var row = Grid.GetRow((UIElement) e.OriginalSource);
-            var column = Grid.GetColumn((UIElement) e.OriginalSource);
-            //RevolveCard(row, column, gameBoard: gameBoard, cardGrid: cardGrid);
+            var row = Grid.GetRow((UIElement)e.OriginalSource);
+            var column = Grid.GetColumn((UIElement)e.OriginalSource);
             Trace.WriteLine($"{row}, {column}");
+            PlayerLogic(sender, column, row);
         }
 
         /// <summary>
@@ -124,7 +125,7 @@ namespace Memory
         /// <returns>New grid</returns>
         public static Grid GenerateCardGrid()
         {
-            var cardGrid = new Grid {Name = "CardGrid", ShowGridLines = true};
+            var cardGrid = new Grid { Name = "CardGrid", ShowGridLines = true };
 
             AddColumns(cardGrid, 4);
             AddRows(cardGrid, 4);
@@ -140,13 +141,13 @@ namespace Memory
         /// <returns>new image</returns>
         private static Image CreateImage(IDictionary card, string side)
         {
-            var simpleImage = new Image {Width = 200, Margin = new Thickness(5)};
+            var simpleImage = new Image { Width = 200, Margin = new Thickness(5) };
 
             var bi = new BitmapImage();
 
             bi.BeginInit();
 
-            bi.UriSource = (Uri) card[side];
+            bi.UriSource = (Uri)card[side];
             //TODO: make it so that the imgs are copied to compiled folder
 
             bi.EndInit();
@@ -154,5 +155,68 @@ namespace Memory
             simpleImage.Source = bi;
             return simpleImage;
         }
+
+
+        /// <summary>
+        ///     Memory logic executed upon clicking a card
+        /// </summary>
+        /// <param name="sender">sender button object, currently unused</param>
+        /// <param name="x">x axis of the card clicked</param>
+        /// <param name="y">y axis of the card clicked</param>
+        /// <returns>void</returns>
+        private static void PlayerLogic(object sender, int x, int y) {
+            GameLogic.RevolveCard(y, x, MainWindow.gameBoard, MainWindow.cardGrid);
+            List<int[]> FlippedCards = null;
+            /// int[0] = row
+            /// int[1] = column
+            
+            /// <summary>
+            ///     Abstraction layer for certain code to make the game logic more readable
+            /// </summary>
+            /// <returns>List<int[]> with 2 entries contains an int array with sizeof() == int*2 of information regarding the x & y axis of a flipped card</int></returns>
+            List<int[]> GetFlippedCards() {
+                List<int[]> _flippedCards = new List<int[]>();
+                for (int i = 0; i < Constant.Height; i++) {
+                    for (int j = 0; j < Constant.Width; j++) {
+                        if ((bool)MainWindow.gameBoard[i, j]["Flipped"]) {
+                            int[] FlippedCard = new int[2];
+                            FlippedCard[0] = i;
+                            FlippedCard[1] = j;
+                            _flippedCards.Add(FlippedCard);
+                        }
+                    }
+                }
+                return _flippedCards;
+            }
+            /// <summary>
+            ///     Abstraction for certain comparisons to make the actual game logic more readable
+            /// </summary>
+            /// <returns>true if 2 cards are the same</returns>
+            bool CompareFlippedCards() {
+                if ((int)MainWindow.gameBoard[FlippedCards[0][0], FlippedCards[0][1]]["Number"] == (int)MainWindow.gameBoard[FlippedCards[1][0], FlippedCards[1][1]]["Number"])
+                    return true;
+                else
+                    return false;
+            }
+
+
+            FlippedCards = GetFlippedCards();
+
+            if (FlippedCards.Count == 2) {  // 2 cards flipped, lets see if they match
+                Trace.WriteLine("2 cards flipped!!");
+                if (CompareFlippedCards())
+                {
+                    Trace.WriteLine("Match!");
+                    /// TODO: Code that executes when 2 cards match
+                    /// • Ignore these cards
+                    /// • Add score
+                }
+                else {
+                    Trace.WriteLine("no match!");
+                    /// TODO: Code that executes when 2 cards do not match
+                    /// • Flip cards back & end turn for current player
+                }
+            }
+        }       
     }
 }
