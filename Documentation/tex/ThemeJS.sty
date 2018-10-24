@@ -1,17 +1,15 @@
 %\provides{themejs}
-
-\usepackage[svgnames]{xcolor}
-\usepackage[hmargin=1in,bmargin=2in,tmargin=1in,centering]{geometry}
+\RequirePackage[explicit]{titlesec}
+\RequirePackage{tikz}
+%\RequirePackage[svgnames]{xcolor}
+%\RequirePackage[hmargin=1in,bmargin=2in,tmargin=1in,centering]{geometry}
+\usetikzlibrary{shapes,shadows,calc}
+\usetikzlibrary{positioning,calc}
 
 \definecolor{dark}{HTML}{3d2645}
 \definecolor{moderate}{HTML}{832161}
+\definecolor{light}{HTML}{da4167}
 
-
-
-\usepackage[explicit]{titlesec}
-\usepackage{tikz}
-\usetikzlibrary{shapes,shadows,calc}
-\usetikzlibrary{positioning,calc}
 
 \newcommand\SecTitle[4]{%
 \begin{tikzpicture}

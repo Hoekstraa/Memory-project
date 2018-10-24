@@ -3,24 +3,50 @@
 \usepackage[dutch]{babel}
 \usepackage{graphicx}
 \usepackage{ThemeJS}
-
-
 \usepackage[defaultsans]{cantarell}
 \renewcommand{\familydefault}{\sfdefault}
 \usepackage[T1]{fontenc}
 
-\title{\Huge \color{dark} Documentatie Project \\
-Memory Game}
-\date{\color{dark}\today}
-\author{\color{dark}Jan Hoekstra
-\\ \\
-Opdrachtgever: NHL-Stenden Hogeschool}
+\title{Documentatie Project Memory Game}
+\date{\today}
+\author{Jan Hoekstra}
+
+\def\myauthor{Jan Hoekstra} % Author
+\def\mycoauthor{} % co-author
+\def\mytitle{Documentatie Project} % title
+\def\mysubtitle{Memory Game}
+\def\mydate{\today} % date
 
 \begin{document}
 \pagenumbering{gobble}
-\maketitle
+
+\begin{titlepage}
+\vspace{5cm}
+\begin{tikzpicture}[remember picture, overlay]
+  \path [left color = dark, bottom color = moderate, rotate=0] (current page.south west) rectangle (current page.north east);
+\end{tikzpicture}
+
+\centering
+\vspace*{\fill}
+\parbox[c][5cm][t]{10cm}{
+  \color{white}\Huge\centering
+
+  \mytitle \\
+  \mysubtitle
+  
+  \vspace{3cm}
+\huge
+  \myauthor \\
+  %\mycoauthor \\
+  \mydate
+
+}
+\vspace*{\fill}
+
+\end{titlepage}
+
 \tableofcontents
-\clearpage
+%\clearpage
 \pagenumbering{arabic}
 
 \section{Voorwoord}
