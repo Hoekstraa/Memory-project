@@ -9,24 +9,42 @@ namespace Memory
     public partial class MainWindow : Window
     {
         /// <summary>
+        ///     Variable containing x by y of card hashtables
+        /// </summary>
+        public static Hashtable[,] GameBoard;
+        /// <summary>
+        ///     Variable containing UI grid containing images.
+        /// </summary>
+        public static Grid CardGrid;
+        /// <summary>
         ///     Start of the program, makes calls to functions to:
         ///     make a new shuffled matrix * 6 and print them out 1 by 1.
         /// </summary>
-        public static Hashtable[,] gameBoard;
-        public static Grid cardGrid;
         public MainWindow()
         {
             InitializeComponent();
-            gameBoard = Matrix.Make(Card.Shuffled(Constant.AllUnique));
-            Matrix.TraceBoard(gameBoard);
+            GameBoard = Matrix.Make(Card.Shuffled(Constant.AllUnique));
+            Matrix.TraceBoard(GameBoard);
             var rootGrid = new Grid {Name = "RootGrid"};
 
             //var hoofdmenu = new Grid();
             //rootGrid.Children.Add(hoofdmenu);
-            cardGrid = GameLogic.FillCardGrid(gameBoard, GameLogic.GenerateCardGrid());
-            rootGrid.Children.Add(cardGrid);
+            GeneratePlayGrid(rootGrid);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rootGrid">Grid to put playgrid into</param>
+        private void GeneratePlayGrid(Grid rootGrid)
+        {
+            var playingInfo = new Grid { Name = "PlayingInfo" };
+
+            CardGrid = GameLogic.FillCardGrid(GameBoard, GameLogic.GenerateCardGrid());
+            rootGrid.Children.Add(CardGrid);
+            GameLogic.AddColumns(rootGrid, 1);
+            rootGrid.Children.Add(playingInfo);
+            Grid.SetColumn(playingInfo, 1);
             MWindow.Content = rootGrid;
         }
-
     }
 }

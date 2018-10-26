@@ -157,6 +157,76 @@ Een item is `done' wanneer:
 
 \section{Technisch Ontwerp}
 
+\subsection{Achtergrond}
+
+\subsubsection{Te gebruiken technieken \& talen}
+
+Om het memory project te realiseren worden de volgende technologieën gebruikt;
+\begin{itemize}
+\item Het project wordt geschreven in C\# en XAML
+\item Er wordt gebruik gemaakt van Microsoft Visual Studio als ontwikkelomgeving
+\item De widget toolkit die gebruikt wordt is Microsoft’s eigen Windows Presentation Foundation
+\item Voor versiebeheer wordt gemaakt van Git in combinatie met GitHub
+\end{itemize}
+
+\subsection{Architectuur}
+
+\subsubsection{Logica}
+
+
+{\bf Waarom dit ontwerp}
+
+Omdat de programmeurs nog niet veel ervaring hebben met ontwikkelen, laat staan
+game state machines etc, wordt het ontwerp opzettelijk simpel gehouden.
+
+{\bf Globaal}
+
+De gamelogica wordt uitgevoerd in een loop. 
+In het diagram hieronder is het belangrijkste gedeelte
+van de high-level logica weergegeven. 
+
+\begin{center}
+\includegraphics[width=.9\linewidth]{./diagram.png}
+\end{center}
+
+{\bf Gedetailleerd}
+
+\begin{enumerate}
+\item Matrix
+
+De matrix wordt als een object aangemaakt. 
+Dit object bevat alle benodigde informatie
+voor het functioneren hiervan.
+
+\item Kaarten
+De kaarten worden als objecten aangemaakt. Deze objecten bevatten informatie zoals:
+
+\begin{itemize}
+\item Kaart ID (verwijst naar plaatje d.m.v. objectfunctie)
+\item 
+\end{itemize}
+\end{enumerate}
+
+\subsubsection{Opslaan/laden van savestates}
+
+Omdat de matrix(incl. de kaarten) een object is,
+kan dit makkelijk worden opgeslagen(geserialiseerd).
+Variabelen kunnen ook makkelijk geserialiseerd worden.
+
+\begin{center}
+\includegraphics[width=.9\linewidth]{./serialization.png}
+\end{center}
+
+\begin{center}
+\includegraphics[width=.9\linewidth]{./serialization2.png}
+\end{center}
+
+\subsubsection{User Interface}
+
+De User Interface interactie wordt geabstraheerd doormiddel van een omkoepelende class.
+Deze class is de enige route om wijzigingen in de UI uit te voeren.
+Het voert geen gamelogica uit.
+
 \begin{figure}[!hb]
   \includegraphics[width=\linewidth]{../Images/datastructure.pdf}
   \caption{Datastructuur}\label{fig:datastructure}

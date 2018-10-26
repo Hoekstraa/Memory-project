@@ -41,6 +41,24 @@ namespace Memory
             Grid.SetColumn(btn, column);
         }
 
+
+        private static void UnflipAllCards(Hashtable[,] gameBoard, Grid cardGrid)
+        {
+            for (var i = 0; i < 4; i++)
+            for (var j = 0; j < 4; j++)
+                if ((bool) gameBoard[i, j]["Flipped"])
+                {
+                    gameBoard[i, j]["Flipped"] = false;
+                    var x = CreateImage(gameBoard[i, j], "Back");
+                    var btn = new Button { Content = x };
+                    btn.Click += Btn_Click;
+                    cardGrid.Children.Add(btn);
+                    Grid.SetRow(btn, i);
+                    Grid.SetColumn(btn, j);
+
+                    }
+        }
+
         /// <summary>
         ///     Retrieves element where row = r and column = c
         /// </summary>
@@ -73,8 +91,7 @@ namespace Memory
                 for (var j = 0; j < 4; j++)
                 {
                     var x = CreateImage(matrix[i, j], "Back");
-                    var btn = new Button();
-                    btn.Content = x;
+                    var btn = new Button {Content = x};
                     btn.Click += Btn_Click;
                     newGrid.Children.Add(btn);
                     Grid.SetRow(btn, j);
@@ -89,7 +106,7 @@ namespace Memory
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private static void Btn_Click(object sender, RoutedEventArgs e) //, Grid cardGrid, Hashtable[,] gameBoard)
+        private static void Btn_Click(object sender, RoutedEventArgs e) //, Grid CardGrid, Hashtable[,] GameBoard)
         {
             var row = Grid.GetRow((UIElement)e.OriginalSource);
             var column = Grid.GetColumn((UIElement)e.OriginalSource);
@@ -102,7 +119,7 @@ namespace Memory
         /// </summary>
         /// <param name="grid">Grid to add columns to</param>
         /// <param name="amount">Amount of columns to be added</param>
-        private static void AddColumns(Grid grid, int amount = 1)
+        public static void AddColumns(Grid grid, int amount = 1)
         {
             for (var i = 0; i < amount; i++)
                 grid.ColumnDefinitions.Add(new ColumnDefinition());
@@ -113,7 +130,7 @@ namespace Memory
         /// </summary>
         /// <param name="grid">Grid to add rows to</param>
         /// <param name="amount">Amount of rows to be added</param>
-        private static void AddRows(Grid grid, int amount = 1)
+        public static void AddRows(Grid grid, int amount = 1)
         {
             for (var i = 0; i < amount; i++)
                 grid.RowDefinitions.Add(new RowDefinition());
@@ -164,7 +181,7 @@ namespace Memory
         /// <param name="y">y axis of the card clicked</param>
         /// <returns>void</returns>
         private static void PlayerLogic(object sender, int x, int y) {
-            GameLogic.RevolveCard(y, x, MainWindow.gameBoard, MainWindow.cardGrid);
+            GameLogic.RevolveCard(y, x, MainWindow.GameBoard, MainWindow.CardGrid);
             // int[0] = row
             // int[1] = column
 
@@ -174,7 +191,7 @@ namespace Memory
                 var newFlippedCards = new List<int[]>();
                 for (var i = 0; i < Constant.Height; i++) {
                     for (var j = 0; j < Constant.Width; j++) {
-                        if (!(bool) MainWindow.gameBoard[i, j]["Flipped"]) continue;
+                        if (!(bool) MainWindow.GameBoard[i, j]["Flipped"]) continue;
                         var flippedCard = new int[2];
                         flippedCard[0] = i;
                         flippedCard[1] = j;
@@ -184,14 +201,14 @@ namespace Memory
                 return newFlippedCards;
             }
 
-            List<int[]> flippedCards = GetFlippedCards();
+            var flippedCards = GetFlippedCards();
 
             //Abstraction for certain comparisons to make the actual game logic more readable
             //true if 2 cards are the same
             bool CompareFlippedCards()
             {
-                var card1 = (int) MainWindow.gameBoard[flippedCards[0][0], flippedCards[0][1]]["Number"];
-                var card2 = (int) MainWindow.gameBoard[flippedCards[1][0], flippedCards[1][1]]["Number"];
+                var card1 = (int) MainWindow.GameBoard[flippedCards[0][0], flippedCards[0][1]]["Number"];
+                var card2 = (int) MainWindow.GameBoard[flippedCards[1][0], flippedCards[1][1]]["Number"];
                 return card1 == card2;
             }
 
@@ -208,7 +225,7 @@ namespace Memory
             else {
                 Trace.WriteLine("no match!");
                 // TODO: Code that executes when 2 cards do not match
-                // • Flip cards back & end turn for current player
+                UnflipAllCards(MainWindow.GameBoard, MainWindow.CardGrid);
             }
         }
     }
