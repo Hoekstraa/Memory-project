@@ -1,0 +1,24 @@
+@startuml
+
+start
+
+: Er verschijnt een matrix met kaarten op het scherm;
+: Speler 1 begint;
+repeat
+: Speler kiest een kaart;
+: De kaart wordt omgedraaid;
+: Speler kiest een tweede kaart;
+: De kaart wordt omgedraaid;
+if (Kaarten hetzelfde?) then (ja)
+   :Speler krijgt een punt;
+   :De kaarten worden van het bord gehaald;
+else (nee)
+   :De volgende speler is aan de beurt;
+   :De kaarten worden weer teruggedraaid;
+endif
+
+repeat while (Bord heeft nog kaarten?) is (ja)
+
+stop
+
+@enduml

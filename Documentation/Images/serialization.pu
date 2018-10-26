@@ -1,0 +1,15 @@
+@startuml
+
+start
+:Opslaan functie wordt uitgevoerd;
+:Blokkeer doorspelen spel;
+:Serializeer objecten en variabelen naar string;
+:Open bestand op disk (Write);
+:Schrijf string naar bestand;
+:Ga terug naar hoofdmenu;
+stop
+
+
+
+
+@enduml

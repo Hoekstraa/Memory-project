@@ -1,0 +1,10 @@
+@startuml
+start
+:Ophalen functie wordt uitgevoerd;
+:Gebruiker selecteert savegame bestand;
+:Open bestand op disk (Read);
+:Lees het complete bestand als string;
+:Vertaal string terug naar de variabelen en objecten;
+:Start met game;
+stop
+@enduml
