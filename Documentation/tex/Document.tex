@@ -11,11 +11,21 @@
 \date{\today}
 \author{Jan Hoekstra}
 
-\def\myauthor{Jan Hoekstra} % Author
-\def\mycoauthor{} % co-author
+\def\myauthor{Jan Hoekstra}
+
 \def\mytitle{Documentatie Project} % title
 \def\mysubtitle{Memory Game}
 \def\mydate{\today} % date
+
+\def\mycoauthors{
+Emiel Hooft \\
+Tjibbe Masselink \\
+Joost Meijer \\
+Niek Raven
+}
+
+
+
 
 \begin{document}
 \pagenumbering{gobble}
@@ -37,16 +47,18 @@
   \vspace{3cm}
 \huge
   \myauthor \\
-  %\mycoauthor \\
-  \mydate
+  \mycoauthors
+  
+  \vspace{3cm}
 
+  \mydate
 }
 \vspace*{\fill}
 
 \end{titlepage}
-
-\tableofcontents
 %\clearpage
+\tableofcontents
+\clearpage
 \pagenumbering{arabic}
 
 \section{Voorwoord}
@@ -59,9 +71,9 @@ korte omschrijving opdracht
 
 \begin{itemize}
 \item Hoekstra, Jan Sietze
-\item Meijer, Joost
 \item Hooft, Emiel
 \item Masselink, Tjibbe
+\item Meijer, Joost
 \item Raven, Niek
 \item B.A. Hensbergen \- Productowner
 \end{itemize}
@@ -91,7 +103,7 @@ De projectgroep heeft de opdracht gekregen een memory spel te maken. Ze hebben t
 
 \subsection{Probleemstelling}
 
-Er is behoefte aan een digitaal memory spel, ontwikkeld door de projectgroep. Zie [Eisen] voor alle verplichte eigenschappen van het memory spel.
+Er is behoefte aan een digitaal memory spel, ontwikkeld door de projectgroep.
 
 \subsection{Werkwijze}
 
@@ -145,6 +157,15 @@ Een item is `done' wanneer:
 \item Artificial Intelligence
 \end{itemize}
 
+\subsection{Eis prioriteiten analyse}
+
+Sommige eisen hebben een hogere prioriteit dan andere, dit wordt in de volgende lijst
+geanaliseerd.
+
+\begin{enumerate}
+\item 
+\end{enumerate}
+
 \clearpage
 
 \section{Technisch Ontwerp}
@@ -188,7 +209,6 @@ van de high-level logica weergegeven.
 De matrix wordt als een object aangemaakt. 
 Dit object bevat alle benodigde informatie
 voor het functioneren hiervan.
-
 \item Kaarten
 De kaarten worden als objecten aangemaakt. Deze objecten bevatten informatie zoals:
 
@@ -242,10 +262,15 @@ De kaarten moeten worden opgeslagen in het programma,
 bij voorkeur onafhankelijk van de gebruikersinterface.
 Er is gekozen voor een 2D array met voor elke kaart een hashtable.
 
-
 \begin{figure}[!hb]
   \includegraphics[width=\linewidth]{../Images/datastructure.pdf}
   \caption{Datastructuur}\label{fig:datastructure}
 \end{figure}
+
+\noindent{\bf Voor/nadelen:}
+Het voordeel van deze methode is dat het makkelijk is om de kaartdata te scheiden is
+van de code.
+Het nadeel hiervan is dat het hashtable type niet veel meer wordt gebruikt, misschien
+waren lists of dictionaries een meer optimale, modernere keuze geweest.
 
 \end{document}
