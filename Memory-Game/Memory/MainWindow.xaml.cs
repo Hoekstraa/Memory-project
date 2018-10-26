@@ -1,12 +1,11 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Collections;
 namespace Memory
 {
     /// <summary>
     ///     Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         /// <summary>
         ///     Variable containing x by y of card hashtables
@@ -25,23 +24,23 @@ namespace Memory
             InitializeComponent();
             GameBoard = Matrix.Make(Card.Shuffled(Constant.AllUnique));
             Matrix.TraceBoard(GameBoard);
-            var rootGrid = new Grid {Name = "RootGrid"};
+            var rootGrid = new Grid {Name = "RootGrid", ShowGridLines = true };
 
             //var hoofdmenu = new Grid();
             //rootGrid.Children.Add(hoofdmenu);
             GeneratePlayGrid(rootGrid);
         }
         /// <summary>
-        /// 
+        /// Generates the grid the game is played in
         /// </summary>
         /// <param name="rootGrid">Grid to put playgrid into</param>
         private void GeneratePlayGrid(Grid rootGrid)
         {
-            var playingInfo = new Grid { Name = "PlayingInfo" };
+            var playingInfo = new Grid { Name = "PlayingInfo", ShowGridLines = true };
 
             CardGrid = GameLogic.FillCardGrid(GameBoard, GameLogic.GenerateCardGrid());
             rootGrid.Children.Add(CardGrid);
-            GameLogic.AddColumns(rootGrid, 1);
+            GameLogic.AddColumns(rootGrid);
             rootGrid.Children.Add(playingInfo);
             Grid.SetColumn(playingInfo, 1);
             MWindow.Content = rootGrid;

@@ -7,9 +7,18 @@ namespace Memory
     /// </summary>
     internal class Constant
     {
+        /// <summary>
+        /// Height of gameboard
+        /// </summary>
         public const int Height = 4;
+        /// <summary>
+        /// Width of gameboard
+        /// </summary>
         public const int Width = 4;
 
+        /// <summary>
+        /// List of all cards, not yet randomized.
+        /// </summary>
         public static readonly Hashtable[] AllUnique =
         {
             Card.New(1), Card.New(1), Card.New(2), Card.New(2),

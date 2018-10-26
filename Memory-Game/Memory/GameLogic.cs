@@ -8,6 +8,9 @@ using System.Windows.Media.Imaging;
 
 namespace Memory
 {
+    /// <summary>
+    /// Contains multiple functions relating to UI interaction and game logic
+    /// </summary>
     public class GameLogic
     {
         /// <summary>
@@ -41,7 +44,12 @@ namespace Memory
             Grid.SetColumn(btn, column);
         }
 
-
+        /// <summary>
+        /// Unflip all the cards that are open simultaneously
+        /// on the UI grid and the backend grid
+        /// </summary>
+        /// <param name="gameBoard"></param>
+        /// <param name="cardGrid"></param>
         private static void UnflipAllCards(Hashtable[,] gameBoard, Grid cardGrid)
         {
             for (var i = 0; i < 4; i++)
@@ -66,7 +74,7 @@ namespace Memory
         /// <param name="r">row number</param>
         /// <param name="c">column number</param>
         /// <returns></returns>
-        private static UIElement GetGridElement(Grid g, int r, int c)
+        private static UIElement GetGridElement(Panel g, int r, int c)
         {
             for (var i = 0; i < g.Children.Count; i++)
             {
@@ -77,7 +85,6 @@ namespace Memory
 
             return null;
         }
-
         /// <summary>
         ///     Takes card matrix maps its images onto the GUI
         /// </summary>
@@ -90,8 +97,7 @@ namespace Memory
             for (var i = 0; i < 4; i++)
                 for (var j = 0; j < 4; j++)
                 {
-                    var x = CreateImage(matrix[i, j], "Back");
-                    var btn = new Button {Content = x};
+                    var btn = new Button {Content = CreateImage(matrix[i, j], "Back")};
                     btn.Click += Btn_Click;
                     newGrid.Children.Add(btn);
                     Grid.SetRow(btn, j);
@@ -100,7 +106,6 @@ namespace Memory
 
             return newGrid;
         }
-
         /// <summary>
         /// Gets row and column of clicked button and returns it to trace output
         /// </summary>
@@ -172,7 +177,6 @@ namespace Memory
             return simpleImage;
         }
 
-
         /// <summary>
         ///     Memory logic executed upon clicking a card
         /// </summary>
@@ -181,7 +185,7 @@ namespace Memory
         /// <param name="y">y axis of the card clicked</param>
         /// <returns>void</returns>
         private static void PlayerLogic(object sender, int x, int y) {
-            GameLogic.RevolveCard(y, x, MainWindow.GameBoard, MainWindow.CardGrid);
+            RevolveCard(y, x, MainWindow.GameBoard, MainWindow.CardGrid);
             // int[0] = row
             // int[1] = column
 
@@ -189,14 +193,13 @@ namespace Memory
             //List<int[]> with 2 entries contains an int array with sizeof() == int*2 of information regarding the x & y axis of a flipped card
             List<int[]> GetFlippedCards() {
                 var newFlippedCards = new List<int[]>();
-                for (var i = 0; i < Constant.Height; i++) {
-                    for (var j = 0; j < Constant.Width; j++) {
-                        if (!(bool) MainWindow.GameBoard[i, j]["Flipped"]) continue;
-                        var flippedCard = new int[2];
-                        flippedCard[0] = i;
-                        flippedCard[1] = j;
-                        newFlippedCards.Add(flippedCard);
-                    }
+                for (var i = 0; i < Constant.Height; i++)
+                for (var j = 0; j < Constant.Width; j++) {
+                    if (!(bool) MainWindow.GameBoard[i, j]["Flipped"]) continue;
+                    var flippedCard = new int[2];
+                    flippedCard[0] = i;
+                    flippedCard[1] = j;
+                    newFlippedCards.Add(flippedCard);
                 }
                 return newFlippedCards;
             }

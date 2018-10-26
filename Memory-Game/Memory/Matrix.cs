@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Diagnostics;
 
 namespace Memory
@@ -39,7 +38,7 @@ namespace Memory
         }
 
         /// <summary>
-        ///     Print matrix to console, in a square
+        ///     Print matrix to console, in a square. Kept for debugging purposes
         /// </summary>
         /// <param name="matrix"></param>
         public static void PrintToConsole(Hashtable[,] matrix)
@@ -47,8 +46,8 @@ namespace Memory
             for (var i = 0; i < Constant.Width; i++)
             for (var j = 0; j < Constant.Height; j++)
             {
-                Console.Write($"{matrix[i, j]["Number"]} ");
-                if (j == 3) Console.WriteLine();
+                Trace.Write(matrix[i, j]["Number"]);
+                    if (j == 3) Trace.Write("/n");
             }
         }
         /// <summary>

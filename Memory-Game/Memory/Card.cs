@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Linq;
 
 namespace Memory
 {
@@ -9,15 +8,6 @@ namespace Memory
     /// </summary>
     internal class Card
     {
-        /// <summary>
-        ///     Print all Cards in Constants.AllUnique
-        /// </summary>
-        public static void PrintAll()
-        {
-            foreach (var entry in Constant.AllUnique.SelectMany(table => table.Cast<DictionaryEntry>()))
-                Console.WriteLine($"{entry.Key} : {entry.Value}");
-        }
-
         /// <summary>
         ///     Make new card hashtable with all data needed
         /// </summary>
