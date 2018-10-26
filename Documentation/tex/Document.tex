@@ -12,10 +12,16 @@
 \author{Jan Hoekstra}
 
 \def\myauthor{Jan Hoekstra} % Author
-\def\mycoauthor{} % co-author
 \def\mytitle{Documentatie Project} % title
 \def\mysubtitle{Memory Game}
 \def\mydate{\today} % date
+
+\def\mycoauthors{
+Emiel Hooft \\
+Tjibbe Masselink \\
+Joost Meijer \\
+Niek Raven
+}
 
 \begin{document}
 \pagenumbering{gobble}
@@ -37,14 +43,16 @@
   \vspace{3cm}
 \huge
   \myauthor \\
-  %\mycoauthor \\
-  \mydate
+  \mycoauthors
+  
+  \vspace{3cm}
 
+  \mydate
 }
 \vspace*{\fill}
 
 \end{titlepage}
-
+%\clearpage
 \tableofcontents
 %\clearpage
 \pagenumbering{arabic}
