@@ -1,0 +1,35 @@
+%\provides{themejs}
+\RequirePackage[explicit]{titlesec}
+\RequirePackage{tikz}
+%\RequirePackage[svgnames]{xcolor}
+%\RequirePackage[hmargin=1in,bmargin=2in,tmargin=1in,centering]{geometry}
+\usetikzlibrary{shapes,shadows,calc}
+\usetikzlibrary{positioning,calc}
+
+\definecolor{dark}{HTML}{3d2645}
+\definecolor{moderate}{HTML}{832161}
+\definecolor{light}{HTML}{da4167}
+
+
+\newcommand\SecTitle[4]{%
+\begin{tikzpicture}
+
+    \node (A) [rectangle,minimum width=\textwidth, minimum height=1cm,color=white,fill=moderate, text width=\textwidth-3cm,align=left] {\hspace{1.5cm}\parbox{\textwidth}{\huge\textbf{\textsf{#4}}}};
+    \fill[fill=dark] (A.north west) -- ($(A.north west)+(1.5cm,0)$) -- ($0.5*(A.north west)-0.5*(A.north west)-(0.51*\textwidth-2.5cm,0)$)--($(A.south west)+(1.5cm,0)$)--(A.south west);
+    \node [color=white](A.north west) at ($0.5*(A.north west)-0.5*(A.north west)-(0.5*\textwidth-1cm,0)$) {\Huge\textbf{\textsf{\thesection}}};
+
+\end{tikzpicture}
+}
+
+\titleformat{\section}
+{\normalfont}{}{0em}
+{\SecTitle{east}{west}{0\paperwidth}{#1}}
+
+
+
+
+\RequirePackage{hyperref}
+\hypersetup{%
+  colorlinks=true,
+  linkcolor  = black
+}

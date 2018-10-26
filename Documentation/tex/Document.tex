@@ -1,0 +1,163 @@
+\documentclass[a4paper,titlepage,11pt]{article}
+
+\usepackage[dutch]{babel}
+\usepackage{graphicx}
+\usepackage{ThemeJS}
+\usepackage[defaultsans]{cantarell}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[T1]{fontenc}
+
+\title{Documentatie Project Memory Game}
+\date{\today}
+\author{Jan Hoekstra}
+
+\def\myauthor{Jan Hoekstra} % Author
+\def\mycoauthor{} % co-author
+\def\mytitle{Documentatie Project} % title
+\def\mysubtitle{Memory Game}
+\def\mydate{\today} % date
+
+\begin{document}
+\pagenumbering{gobble}
+
+\begin{titlepage}
+\vspace{5cm}
+\begin{tikzpicture}[remember picture, overlay]
+  \path [left color = dark, bottom color = moderate, rotate=0] (current page.south west) rectangle (current page.north east);
+\end{tikzpicture}
+
+\centering
+\vspace*{\fill}
+\parbox[c][5cm][t]{10cm}{
+  \color{white}\Huge\centering
+
+  \mytitle \\
+  \mysubtitle
+  
+  \vspace{3cm}
+\huge
+  \myauthor \\
+  %\mycoauthor \\
+  \mydate
+
+}
+\vspace*{\fill}
+
+\end{titlepage}
+
+\tableofcontents
+%\clearpage
+\pagenumbering{arabic}
+
+\section{Voorwoord}
+
+\subsection{Opdracht}
+
+korte omschrijving opdracht
+
+\subsection{Groep}
+
+\begin{itemize}
+\item Hoekstra, Jan Sietze
+\item Meijer, Joost
+\item Hooft, Emiel
+\item Masselink, Tjibbe
+\item Raven, Niek
+\item B.A. Hensbergen \- Productowner
+\end{itemize}
+
+\clearpage
+
+\section{Managementsamenvatting}
+
+probleemschets, hoofdvraag, belang van de hoofdvraag
+methode en werkwijze
+resultaten
+conclusies en aanbevelingen
+
+\clearpage
+
+\section{Inleiding}
+
+\clearpage
+
+\section{Projectomschrijving}
+
+De bedoeling van dit project is het gaan opzetten van een Memory Game met de eisen en wensen van de klant. Het project wordt in een groep van 5 man groot uitgevoerd.
+
+\subsection{Huidige situatie}
+
+De projectgroep heeft de opdracht gekregen een memory spel te maken. Ze hebben toegang tot een tutor en een product owner voor hulp.
+
+\subsection{Probleemstelling}
+
+Er is behoefte aan een digitaal memory spel, ontwikkeld door de projectgroep. Zie [Eisen] voor alle verplichte eigenschappen van het memory spel.
+
+\subsection{Werkwijze}
+
+Voor het project is 1 periode vastgesteld. Week 1\-10 van het eerste schooljaar. De eerste 5 weken kunnen worden gebruikt voor planning etcetera en de 5 opvolgende weken voor het programmeren.
+
+We gaan werken met een scrum methode, elke week een gedeelte. De eisen worden elke week opgesplitst. Elke week is er een demo voor de productowner.
+
+\subsection{Definition of Done}
+
+Een item is `done' wanneer:
+
+\begin{itemize}
+
+\item het door een teamgenoot gereviewed is
+\item het getest is
+\item het gedane werk omschreven staat in een user story
+\item het gedocumenteerd is
+\end{itemize}
+
+\clearpage
+
+\section{Functioneel Ontwerp}
+
+\subsection{MoSCoW analyse}
+
+{\bf Must Have}
+
+\begin{itemize}
+\item 4 x 4 matrix van kaarten
+\item Gameveld moet dynamisch geladen worden
+\item 2 Spelers moeten tegen elkaar kunnen spelen in 1 game
+\item De spelers kunnen hun namen ingeven in het scherm;
+\item Resetknop
+\item Persistent scoreboard met namen met win/verlies status
+\item Vanuit het hoofdmenu moet er genavigeerd kunnen worden naar een pagina waar de 
+  highscores op te zien zijn
+\item Status van spel bevriezen en later hervatten d.m.v. een tekstbestand
+\end{itemize}
+
+\noindent {\bf Should Have}
+\begin{itemize}
+\item Kaartenthema
+\end{itemize}
+\noindent {\bf Could Have}
+\begin{itemize}
+\item Spelers kunnen een avatar kiezen.
+\end{itemize}
+\noindent {\bf Won't have}
+\begin{itemize}
+\item Een optie in-game om kaartenthema te selecteren
+\item Artificial Intelligence
+\end{itemize}
+
+\clearpage
+
+\section{Technisch Ontwerp}
+
+\begin{figure}[!hb]
+  \includegraphics[width=\linewidth]{../Images/datastructure.pdf}
+  \caption{Datastructuur}\label{fig:datastructure}
+\end{figure}
+
+\end{document}
+
+
+Hoe gebruiken wij Scrum in het project
+
+Testen
+Resultaat
