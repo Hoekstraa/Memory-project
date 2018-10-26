@@ -170,6 +170,13 @@ geanaliseerd.
 
 \section{Technisch Ontwerp}
 
+\subsection{Volgorde van onderdelen}
+
+De volgorde waarin het programma wordt geschreven is:
+\begin{enumerate}
+\item 
+\end{enumerate}
+
 \subsection{Gemaakte keuzes architectuur}
 
 In deze subsectie wordt omschreven welke keuzes tijdens het project zijn gemaakt,

@@ -148,7 +148,6 @@ namespace Memory
             bi.BeginInit();
 
             bi.UriSource = (Uri)card[side];
-            //TODO: make it so that the imgs are copied to compiled folder
 
             bi.EndInit();
 
@@ -166,57 +165,51 @@ namespace Memory
         /// <returns>void</returns>
         private static void PlayerLogic(object sender, int x, int y) {
             GameLogic.RevolveCard(y, x, MainWindow.gameBoard, MainWindow.cardGrid);
-            List<int[]> FlippedCards = null;
-            /// int[0] = row
-            /// int[1] = column
-            
-            /// <summary>
-            ///     Abstraction layer for certain code to make the game logic more readable
-            /// </summary>
-            /// <returns>List<int[]> with 2 entries contains an int array with sizeof() == int*2 of information regarding the x & y axis of a flipped card</int></returns>
+            // int[0] = row
+            // int[1] = column
+
+            //Abstraction layer for certain code to make the game logic more readable
+            //List<int[]> with 2 entries contains an int array with sizeof() == int*2 of information regarding the x & y axis of a flipped card
             List<int[]> GetFlippedCards() {
-                List<int[]> _flippedCards = new List<int[]>();
-                for (int i = 0; i < Constant.Height; i++) {
-                    for (int j = 0; j < Constant.Width; j++) {
-                        if ((bool)MainWindow.gameBoard[i, j]["Flipped"]) {
-                            int[] FlippedCard = new int[2];
-                            FlippedCard[0] = i;
-                            FlippedCard[1] = j;
-                            _flippedCards.Add(FlippedCard);
-                        }
+                var newFlippedCards = new List<int[]>();
+                for (var i = 0; i < Constant.Height; i++) {
+                    for (var j = 0; j < Constant.Width; j++) {
+                        if (!(bool) MainWindow.gameBoard[i, j]["Flipped"]) continue;
+                        var flippedCard = new int[2];
+                        flippedCard[0] = i;
+                        flippedCard[1] = j;
+                        newFlippedCards.Add(flippedCard);
                     }
                 }
-                return _flippedCards;
+                return newFlippedCards;
             }
-            /// <summary>
-            ///     Abstraction for certain comparisons to make the actual game logic more readable
-            /// </summary>
-            /// <returns>true if 2 cards are the same</returns>
-            bool CompareFlippedCards() {
-                if ((int)MainWindow.gameBoard[FlippedCards[0][0], FlippedCards[0][1]]["Number"] == (int)MainWindow.gameBoard[FlippedCards[1][0], FlippedCards[1][1]]["Number"])
-                    return true;
-                else
-                    return false;
+
+            List<int[]> flippedCards = GetFlippedCards();
+
+            //Abstraction for certain comparisons to make the actual game logic more readable
+            //true if 2 cards are the same
+            bool CompareFlippedCards()
+            {
+                var card1 = (int) MainWindow.gameBoard[flippedCards[0][0], flippedCards[0][1]]["Number"];
+                var card2 = (int) MainWindow.gameBoard[flippedCards[1][0], flippedCards[1][1]]["Number"];
+                return card1 == card2;
             }
 
 
-            FlippedCards = GetFlippedCards();
-
-            if (FlippedCards.Count == 2) {  // 2 cards flipped, lets see if they match
-                Trace.WriteLine("2 cards flipped!!");
-                if (CompareFlippedCards())
-                {
-                    Trace.WriteLine("Match!");
-                    /// TODO: Code that executes when 2 cards match
-                    /// • Ignore these cards
-                    /// • Add score
-                }
-                else {
-                    Trace.WriteLine("no match!");
-                    /// TODO: Code that executes when 2 cards do not match
-                    /// • Flip cards back & end turn for current player
-                }
+            if (flippedCards.Count != 2) return; // if 2 cards flipped, lets see if they match
+            Trace.WriteLine("2 cards flipped!!");
+            if (CompareFlippedCards())
+            {
+                Trace.WriteLine("Match!");
+                // TODO: Code that executes when 2 cards match
+                // • Ignore these cards
+                // • Add score
             }
-        }       
+            else {
+                Trace.WriteLine("no match!");
+                // TODO: Code that executes when 2 cards do not match
+                // • Flip cards back & end turn for current player
+            }
+        }
     }
 }

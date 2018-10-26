@@ -1,4 +1,4 @@
-\documentclass[a4paper,titlepage,11pt]{article}
+\message{ !name(Document.tex)}\documentclass[a4paper,titlepage,11pt]{article}
 
 \usepackage[dutch]{babel}
 \usepackage{graphicx}
@@ -11,23 +11,16 @@
 \date{\today}
 \author{Jan Hoekstra}
 
-\def\myauthor{Jan Hoekstra}
-
+\def\myauthor{Jan Hoekstra} % Author
+\def\mycoauthor{} % co-author
 \def\mytitle{Documentatie Project} % title
 \def\mysubtitle{Memory Game}
 \def\mydate{\today} % date
 
-\def\mycoauthors{
-Emiel Hooft \\
-Tjibbe Masselink \\
-Joost Meijer \\
-Niek Raven
-}
-
-
-
-
 \begin{document}
+
+\message{ !name(Document.tex) !offset(-3) }
+
 \pagenumbering{gobble}
 
 \begin{titlepage}
@@ -47,18 +40,16 @@ Niek Raven
   \vspace{3cm}
 \huge
   \myauthor \\
-  \mycoauthors
-  
-  \vspace{3cm}
-
+  %\mycoauthor \\
   \mydate
+
 }
 \vspace*{\fill}
 
 \end{titlepage}
-%\clearpage
+
 \tableofcontents
-\clearpage
+%\clearpage
 \pagenumbering{arabic}
 
 \section{Voorwoord}
@@ -71,9 +62,9 @@ korte omschrijving opdracht
 
 \begin{itemize}
 \item Hoekstra, Jan Sietze
+\item Meijer, Joost
 \item Hooft, Emiel
 \item Masselink, Tjibbe
-\item Meijer, Joost
 \item Raven, Niek
 \item B.A. Hensbergen \- Productowner
 \end{itemize}
@@ -103,7 +94,7 @@ De projectgroep heeft de opdracht gekregen een memory spel te maken. Ze hebben t
 
 \subsection{Probleemstelling}
 
-Er is behoefte aan een digitaal memory spel, ontwikkeld door de projectgroep.
+Er is behoefte aan een digitaal memory spel, ontwikkeld door de projectgroep. Zie [Eisen] voor alle verplichte eigenschappen van het memory spel.
 
 \subsection{Werkwijze}
 
@@ -157,48 +148,20 @@ Een item is `done' wanneer:
 \item Artificial Intelligence
 \end{itemize}
 
-\subsection{Eis prioriteiten analyse}
-
-Sommige eisen hebben een hogere prioriteit dan andere, dit wordt in de volgende lijst
-geanaliseerd.
-
-\begin{enumerate}
-\item 
-\end{enumerate}
-
 \clearpage
 
 \section{Technisch Ontwerp}
-
-\subsection{Gemaakte keuzes architectuur}
-
-In deze subsectie wordt omschreven welke keuzes tijdens het project zijn gemaakt,
-deze zijn gedocumenteerd ter referentie.
-
-\subsubsection{Logica}
-
-{\bf Generatorfuncties:}
-Om globale `state' te voorkomen, zijn zo veel mogelijk functies geschreven met
-het doel een nieuw object terug te geven in plaats van een object van buiten te bewerken.
-
-\subsubsection{Data}
-
-{\bf Kaarten:}
-De kaarten moeten worden opgeslagen in het programma,
-bij voorkeur onafhankelijk van de gebruikersinterface.
-Er is gekozen voor een 2D array met voor elke kaart een hashtable.
 
 \begin{figure}[!hb]
   \includegraphics[width=\linewidth]{../Images/datastructure.pdf}
   \caption{Datastructuur}\label{fig:datastructure}
 \end{figure}
 
-\noindent{\bf Voor/nadelen:}
-Het voordeel van deze methode is dat het makkelijk is om de kaartdata te scheiden is
-van de code.
-Het nadeel hiervan is dat het hashtable type niet veel meer wordt gebruikt, misschien
-waren lists of dictionaries een meer optimale, modernere keuze geweest.
-
-
-
 \end{document}
+
+
+Hoe gebruiken wij Scrum in het project
+
+Testen
+Resultaat
+\message{ !name(Document.tex) !offset(-167) }
