@@ -68,8 +68,8 @@ namespace Memory
             rootGrid.ColumnDefinitions.Add(col1);
 
             var menuButtonGrid = new Grid {Name = "MenuButtonGrid", ShowGridLines = true};
-            var highscoresGrid = new DataGrid {Name = "HighscoresGrid"};
-            rootGrid.Children.Add(highscoresGrid);
+            //var highscoresGrid = new DataGrid {Name = "HighscoresGrid"};
+            //rootGrid.Children.Add(highscoresGrid);
             rootGrid.Children.Add(menuButtonGrid);
             Grid.SetColumn(menuButtonGrid, 1);
 
@@ -77,11 +77,11 @@ namespace Memory
             menuButtonGrid.Children.Add(panel);
 
             var startbtn = new Button {Content = "Start"};
-            startbtn.Click += Startbtn_Click;
+            startbtn.Click += PreStartbtn_Click;
 
             var continueBtn = new Button {Content = "Continue" };
 
-            var highscorebtn = new Button { Content = "HighscoreBtn" };
+            var highscorebtn = new Button { Content = "Highscore" };
             highscorebtn.Click += Highscorebtn_Click;
 
             var exitBtn = new Button { Content = "Exit" };
@@ -92,11 +92,7 @@ namespace Memory
             panel.Children.Add(highscorebtn);
             panel.Children.Add(exitBtn);
         }
-        /// <summary>
-        /// Generates and displays gameroot grid when startbutton is clicked
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void Startbtn_Click(object sender, RoutedEventArgs e)
         {
             var gameRootGrid = new Grid { Name = "GameRootGrid", ShowGridLines = true };
@@ -104,9 +100,42 @@ namespace Memory
             MWindow.Content = gameRootGrid;
         }
 
+        /// <summary>
+        /// Generates and displays gameroot grid when startbutton is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PreStartbtn_Click(object sender, RoutedEventArgs e)
+        {
+            var optionGrid = new Grid { Name = "HighscoresGrid" };
+            var menuRootGrid = new Grid { Name = "MenuRootGrid", ShowGridLines = true };
+            GenerateMenuGrid(menuRootGrid);
+            menuRootGrid.Children.Add(optionGrid);
+
+
+            var optionPanel = new StackPanel{VerticalAlignment = VerticalAlignment.Center};
+            var name1Block = new TextBlock{Text = "Speler 1 naam:"};
+            optionPanel.Children.Add(name1Block);
+            var name1Box = new TextBox {Name = "Name1box"};
+            optionPanel.Children.Add(name1Box);
+
+            var name2Block = new TextBlock { Text = "Speler 2 naam:" };
+            optionPanel.Children.Add(name2Block);
+            var name2Box = new TextBox { Name = "Name2box" };
+            optionPanel.Children.Add(name2Box);
+
+            var actualstartbtn = new Button{Content = "Start game"};
+            actualstartbtn.Click += Startbtn_Click;
+            optionPanel.Children.Add(actualstartbtn);
+
+            menuRootGrid.Children.Add(optionPanel);
+            MWindow.Content = menuRootGrid;
+        }
+
         private void Highscorebtn_Click(object sender, RoutedEventArgs e)
         {
             var highscoresGrid = new DataGrid { Name = "HighscoresGrid" };
+            //load data from disk to grid
             var menuRootGrid = new Grid { Name = "MenuRootGrid", ShowGridLines = true };
             GenerateMenuGrid(menuRootGrid);
             menuRootGrid.Children.Add(highscoresGrid);
