@@ -50,11 +50,11 @@ namespace Memory
         /// </summary>
         /// <param name="gameBoard"></param>
         /// <param name="cardGrid"></param>
-        private static void UnflipAllCards(Hashtable[,] gameBoard, Grid cardGrid)
+        private static void UnflipAllCards(Hashtable[,] gameBoard, Panel cardGrid)
         {
             for (var i = 0; i < 4; i++)
             for (var j = 0; j < 4; j++)
-                if ((bool) gameBoard[i, j]["Flipped"])
+                if ((bool) gameBoard[i, j]["Flipped"] && !(bool) gameBoard[i, j]["Found"])
                 {
                     gameBoard[i, j]["Flipped"] = false;
                     var x = CreateImage(gameBoard[i, j], "Back");
@@ -195,7 +195,7 @@ namespace Memory
                 var newFlippedCards = new List<int[]>();
                 for (var i = 0; i < Constant.Height; i++)
                 for (var j = 0; j < Constant.Width; j++) {
-                    if (!(bool) MainWindow.GameBoard[i, j]["Flipped"]) continue;
+                    if (!(bool)MainWindow.GameBoard[i, j]["Flipped"] || (bool) MainWindow.GameBoard[i, j]["Found"]) continue;
                     var flippedCard = new int[2];
                     flippedCard[0] = i;
                     flippedCard[1] = j;
@@ -223,6 +223,15 @@ namespace Memory
                 Trace.WriteLine("Match!");
                 // TODO: Code that executes when 2 cards match
                 // • Ignore these cards
+
+                foreach (var cardXY in flippedCards)
+                {
+                    var cardX = cardXY[0];
+                    var cardY = cardXY[1];
+
+                    MainWindow.GameBoard[cardX, cardY]["Found"] = true;
+                }
+
                 // • Add score
             }
             else {
