@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -52,6 +53,7 @@ namespace Memory
         /// <param name="cardGrid"></param>
         private static void UnflipAllCards(Hashtable[,] gameBoard, Panel cardGrid)
         {
+            Thread.Sleep(1000);
             for (var i = 0; i < 4; i++)
             for (var j = 0; j < 4; j++)
                 if ((bool) gameBoard[i, j]["Flipped"] && !(bool) gameBoard[i, j]["Found"])
@@ -116,6 +118,7 @@ namespace Memory
             var row = Grid.GetRow((UIElement)e.OriginalSource);
             var column = Grid.GetColumn((UIElement)e.OriginalSource);
             Trace.WriteLine($"{row}, {column}");
+            RevolveCard(row, column, MainWindow.GameBoard, MainWindow.CardGrid);
             PlayerLogic(sender, column, row);
         }
 
@@ -147,7 +150,7 @@ namespace Memory
         /// <returns>New grid</returns>
         public static Grid GenerateCardGrid()
         {
-            var cardGrid = new Grid { Name = "CardGrid", ShowGridLines = true };
+            var cardGrid = new Grid { Name = "CardGrid", ShowGridLines = true};
 
             AddColumns(cardGrid, 4);
             AddRows(cardGrid, 4);
@@ -178,6 +181,21 @@ namespace Memory
         }
 
         /// <summary>
+        /// Set "Found" value true for all open cards on the current gameboard
+        /// </summary>
+        /// <param name="flippedCards">list of coords of all flipped cards</param>
+        private static void IgnoreFlippedCards(IEnumerable<int[]> flippedCards)
+        {
+            foreach (var cardCoords in flippedCards)
+            {
+                var cardX = cardCoords[0];
+                var cardY = cardCoords[1];
+
+                MainWindow.GameBoard[cardX, cardY]["Found"] = true;
+            }
+        }
+
+        /// <summary>
         ///     Memory logic executed upon clicking a card
         /// </summary>
         /// <param name="sender">sender button object, currently unused</param>
@@ -185,7 +203,7 @@ namespace Memory
         /// <param name="y">y axis of the card clicked</param>
         /// <returns>void</returns>
         private static void PlayerLogic(object sender, int x, int y) {
-            RevolveCard(y, x, MainWindow.GameBoard, MainWindow.CardGrid);
+            
             // int[0] = row
             // int[1] = column
 
@@ -194,8 +212,12 @@ namespace Memory
             List<int[]> GetFlippedCards() {
                 var newFlippedCards = new List<int[]>();
                 for (var i = 0; i < Constant.Height; i++)
-                for (var j = 0; j < Constant.Width; j++) {
-                    if (!(bool)MainWindow.GameBoard[i, j]["Flipped"] || (bool) MainWindow.GameBoard[i, j]["Found"]) continue;
+                for (var j = 0; j < Constant.Width; j++)
+                {
+                    var flipped = (bool) MainWindow.GameBoard[i, j]["Flipped"];
+                    var found = (bool) MainWindow.GameBoard[i, j]["Found"];
+
+                    if (!flipped || found) continue;
                     var flippedCard = new int[2];
                     flippedCard[0] = i;
                     flippedCard[1] = j;
@@ -215,7 +237,6 @@ namespace Memory
                 return card1 == card2;
             }
 
-
             if (flippedCards.Count != 2) return; // if 2 cards flipped, lets see if they match
             Trace.WriteLine("2 cards flipped!!");
             if (CompareFlippedCards())
@@ -223,14 +244,8 @@ namespace Memory
                 Trace.WriteLine("Match!");
                 // TODO: Code that executes when 2 cards match
                 // • Ignore these cards
+                IgnoreFlippedCards(flippedCards);
 
-                foreach (var cardXY in flippedCards)
-                {
-                    var cardX = cardXY[0];
-                    var cardY = cardXY[1];
-
-                    MainWindow.GameBoard[cardX, cardY]["Found"] = true;
-                }
 
                 // • Add score
             }
@@ -240,5 +255,7 @@ namespace Memory
                 UnflipAllCards(MainWindow.GameBoard, MainWindow.CardGrid);
             }
         }
+
+
     }
 }
