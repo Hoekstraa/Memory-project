@@ -31,7 +31,7 @@ namespace Memory
             var menuRootGrid = new Grid { Name = "MenuRootGrid", ShowGridLines = true };
             GeneratePlayGrid(gameRootGrid);
             GenerateMenuGrid(menuRootGrid);
-            MWindow.Content = gameRootGrid; //Switch between menu and game screens
+            MWindow.Content = menuRootGrid; //Switch between menu and game screens
         }
         /// <summary>
         /// Generates the grid the game is played in
@@ -61,21 +61,17 @@ namespace Memory
         /// <param name="rootGrid"></param>
         private static void GenerateMenuGrid(Grid rootGrid)
         {
-
-            var menuButtonGrid = new Grid { Name = "MenuButtonGrid", ShowGridLines = true };
-
-            var highscoresGrid = new DataGrid{Name = "HigscoresGrid"};
-
-            var col2 = new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) };
-            var col1 = new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) };
+            var col2 = new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) }; // 2/3 of screen
+            var col1 = new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }; // 1/3 of screen
 
             rootGrid.ColumnDefinitions.Add(col2);
             rootGrid.ColumnDefinitions.Add(col1);
-            rootGrid.Children.Add(highscoresGrid);
 
+            var menuButtonGrid = new Grid { Name = "MenuButtonGrid", ShowGridLines = true };
+            var highscoresGrid = new DataGrid { Name = "HigscoresGrid" };
+            rootGrid.Children.Add(highscoresGrid);
             rootGrid.Children.Add(menuButtonGrid);
             Grid.SetColumn(menuButtonGrid, 1);
-
         }
     }
 }

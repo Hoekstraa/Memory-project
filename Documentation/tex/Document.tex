@@ -54,7 +54,7 @@ Niek Raven
 \end{titlepage}
 %\clearpage
 \tableofcontents
-%\clearpage
+\clearpage
 \pagenumbering{arabic}
 
 \section{Voorwoord}
@@ -186,7 +186,7 @@ In het diagram hieronder is het belangrijkste gedeelte
 van de high-level logica weergegeven. 
 
 \begin{center}
-\includegraphics[width=.9\linewidth]{./diagram.png}
+\includegraphics[width=.9\linewidth]{../Images/diagram.png}
 \end{center}
 
 {\bf Gedetailleerd}
@@ -194,18 +194,24 @@ van de high-level logica weergegeven.
 \begin{enumerate}
 \item Matrix
 
-De matrix wordt als een object aangemaakt. 
-Dit object bevat alle benodigde informatie
-voor het functioneren hiervan.
+  De matrix wordt als een 2D array aangemaakt. Deze wordt gevuld door een
+  1D array van 16 gehusselde kaarten te 'mappen' op de 2D array.
 
 \item Kaarten
-De kaarten worden als objecten aangemaakt. Deze objecten bevatten informatie zoals:
+De kaarten worden als hashmaps aangemaakt. Deze hashmaps bevatten informatie zoals:
 
 \begin{itemize}
-\item Kaart ID (verwijst naar plaatje d.m.v. objectfunctie)
-\item 
+\item Kaart nummer
+\item Kaart plaatjes
+\item Of de kaart omgedraaid is of niet
+\item Of de kaart 'gevonden' is of niet
 \end{itemize}
 \end{enumerate}
+
+\begin{figure}[!hb]
+  \includegraphics[width=\linewidth]{../Images/datastructure.pdf}
+  \caption{Datastructuur}\label{fig:datastructure}
+\end{figure}
 
 \subsubsection{Opslaan/laden van savestates}
 
@@ -214,11 +220,11 @@ kan dit makkelijk worden opgeslagen(geserialiseerd).
 Variabelen kunnen ook makkelijk geserialiseerd worden.
 
 \begin{center}
-\includegraphics[width=.9\linewidth]{./serialization.png}
+\includegraphics[width=.5\linewidth]{../Images/serialization.png}
 \end{center}
 
 \begin{center}
-\includegraphics[width=.9\linewidth]{./serialization2.png}
+\includegraphics[width=.5\linewidth]{../Images/serialization2.png}
 \end{center}
 
 \subsubsection{User Interface}
@@ -227,15 +233,4 @@ De User Interface interactie wordt geabstraheerd doormiddel van een omkoepelende
 Deze class is de enige route om wijzigingen in de UI uit te voeren.
 Het voert geen gamelogica uit.
 
-\begin{figure}[!hb]
-  \includegraphics[width=\linewidth]{../Images/datastructure.pdf}
-  \caption{Datastructuur}\label{fig:datastructure}
-\end{figure}
-
 \end{document}
-
-
-Hoe gebruiken wij Scrum in het project
-
-Testen
-Resultaat
