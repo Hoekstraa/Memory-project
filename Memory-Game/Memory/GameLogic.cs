@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace Memory
@@ -105,7 +106,6 @@ namespace Memory
                     Grid.SetRow(btn, j);
                     Grid.SetColumn(btn, i);
                 }
-
             return newGrid;
         }
         /// <summary>
@@ -166,7 +166,13 @@ namespace Memory
         /// <returns>new image</returns>
         private static Image CreateImage(IDictionary card, string side)
         {
-            var simpleImage = new Image { Width = 200, Margin = new Thickness(5) };
+            var simpleImage = new Image
+            {
+                Width = 200, Margin = new Thickness(5),
+                VerticalAlignment = VerticalAlignment.Stretch,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                Stretch = Stretch.UniformToFill
+            };
 
             var bi = new BitmapImage();
 
