@@ -29,9 +29,7 @@ namespace Memory
             GameBoard = Matrix.Make(Card.Shuffled(Constant.AllUnique));
             Matrix.TraceBoard(GameBoard);
 
-            var gameRootGrid = new Grid {Name = "GameRootGrid", ShowGridLines = true};
             var menuRootGrid = new Grid {Name = "MenuRootGrid", ShowGridLines = true};
-            GeneratePlayGrid(gameRootGrid);
             GenerateMenuGrid(menuRootGrid);
             MWindow.Content = menuRootGrid; //Switch between menu and game screens
         }
@@ -61,7 +59,7 @@ namespace Memory
         ///     Generates the main menu
         /// </summary>
         /// <param name="rootGrid"></param>
-        private static void GenerateMenuGrid(Grid rootGrid)
+        private void GenerateMenuGrid(Grid rootGrid)
         {
             var col2 = new ColumnDefinition {Width = new GridLength(2, GridUnitType.Star)}; // 2/3 of screen
             var col1 = new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star)}; // 1/3 of screen
@@ -79,10 +77,48 @@ namespace Memory
             menuButtonGrid.Children.Add(panel);
 
             var startbtn = new Button {Content = "Start"};
+            startbtn.Click += Startbtn_Click;
+
             var continueBtn = new Button {Content = "Continue" };
+
+            var highscorebtn = new Button { Content = "HighscoreBtn" };
+            highscorebtn.Click += Highscorebtn_Click;
+
+            var exitBtn = new Button { Content = "Exit" };
+            exitBtn.Click += Exitbtn_Click;
 
             panel.Children.Add(startbtn);
             panel.Children.Add(continueBtn);
+            panel.Children.Add(highscorebtn);
+            panel.Children.Add(exitBtn);
         }
+        /// <summary>
+        /// Generates and displays gameroot grid when startbutton is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Startbtn_Click(object sender, RoutedEventArgs e)
+        {
+            var gameRootGrid = new Grid { Name = "GameRootGrid", ShowGridLines = true };
+            GeneratePlayGrid(gameRootGrid);
+            MWindow.Content = gameRootGrid;
+        }
+
+        private void Highscorebtn_Click(object sender, RoutedEventArgs e)
+        {
+            var highscoresGrid = new DataGrid { Name = "HighscoresGrid" };
+            var menuRootGrid = new Grid { Name = "MenuRootGrid", ShowGridLines = true };
+            GenerateMenuGrid(menuRootGrid);
+            menuRootGrid.Children.Add(highscoresGrid);
+            MWindow.Content = menuRootGrid;
+        }
+
+        /// <summary>
+        /// Exits application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private static void Exitbtn_Click(object sender, RoutedEventArgs e)
+            => Application.Current.Shutdown(0);
     }
 }
