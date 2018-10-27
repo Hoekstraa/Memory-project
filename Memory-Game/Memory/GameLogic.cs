@@ -203,7 +203,6 @@ namespace Memory
         /// <param name="y">y axis of the card clicked</param>
         /// <returns>void</returns>
         private static void PlayerLogic(object sender, int x, int y) {
-            
             // int[0] = row
             // int[1] = column
 
@@ -243,9 +242,8 @@ namespace Memory
             {
                 Trace.WriteLine("Match!");
                 // TODO: Code that executes when 2 cards match
-                // • Ignore these cards
-                IgnoreFlippedCards(flippedCards);
 
+                IgnoreFlippedCards(flippedCards);
 
                 // • Add score
             }
