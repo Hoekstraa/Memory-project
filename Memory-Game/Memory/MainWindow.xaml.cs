@@ -1,5 +1,7 @@
 ﻿using System.Windows.Controls;
 using System.Collections;
+using System.Windows;
+
 namespace Memory
 {
     /// <summary>
@@ -24,26 +26,56 @@ namespace Memory
             InitializeComponent();
             GameBoard = Matrix.Make(Card.Shuffled(Constant.AllUnique));
             Matrix.TraceBoard(GameBoard);
-            var rootGrid = new Grid {Name = "RootGrid", ShowGridLines = true };
 
-            //var hoofdmenu = new Grid();
-            //rootGrid.Children.Add(hoofdmenu);
-            GeneratePlayGrid(rootGrid);
+            var gameRootGrid = new Grid { Name = "GameRootGrid", ShowGridLines = true };
+            var menuRootGrid = new Grid { Name = "MenuRootGrid", ShowGridLines = true };
+            GeneratePlayGrid(gameRootGrid);
+            GenerateMenuGrid(menuRootGrid);
+            MWindow.Content = gameRootGrid; //Switch between menu and game screens
         }
         /// <summary>
         /// Generates the grid the game is played in
         /// </summary>
         /// <param name="rootGrid">Grid to put playgrid into</param>
-        private void GeneratePlayGrid(Grid rootGrid)
+        private static void GeneratePlayGrid(Grid rootGrid)
         {
+
             var playingInfo = new Grid { Name = "PlayingInfo", ShowGridLines = true };
 
             CardGrid = GameLogic.FillCardGrid(GameBoard, GameLogic.GenerateCardGrid());
+
+            var col2 = new ColumnDefinition {Width = new GridLength(2, GridUnitType.Star)};
+            var col1 = new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star) };
+
+            rootGrid.ColumnDefinitions.Add(col2);
+            rootGrid.ColumnDefinitions.Add(col1);
             rootGrid.Children.Add(CardGrid);
-            GameLogic.AddColumns(rootGrid);
+
             rootGrid.Children.Add(playingInfo);
             Grid.SetColumn(playingInfo, 1);
-            MWindow.Content = rootGrid;
+
+        }
+        /// <summary>
+        /// Generates the main menu
+        /// </summary>
+        /// <param name="rootGrid"></param>
+        private static void GenerateMenuGrid(Grid rootGrid)
+        {
+
+            var menuButtonGrid = new Grid { Name = "MenuButtonGrid", ShowGridLines = true };
+
+            var highscoresGrid = new DataGrid{Name = "HigscoresGrid"};
+
+            var col2 = new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) };
+            var col1 = new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) };
+
+            rootGrid.ColumnDefinitions.Add(col2);
+            rootGrid.ColumnDefinitions.Add(col1);
+            rootGrid.Children.Add(highscoresGrid);
+
+            rootGrid.Children.Add(menuButtonGrid);
+            Grid.SetColumn(menuButtonGrid, 1);
+
         }
     }
 }
