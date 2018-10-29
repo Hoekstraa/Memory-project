@@ -32,6 +32,10 @@ namespace Memory
             var menuRootGrid = new Grid {Name = "MenuRootGrid", ShowGridLines = true};
             GenerateMenuGrid(menuRootGrid);
             MWindow.Content = menuRootGrid; //Switch between menu and game screens
+
+            // Generating a new state is this easy!!!!!!!!
+            State state = new State(new string[]{"jack", "jeff"}, Constant.Height, Constant.Width, @"Images/");
+           
         }
 
         /// <summary>
