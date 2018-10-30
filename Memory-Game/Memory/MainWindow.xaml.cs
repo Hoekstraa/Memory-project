@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Memory
 {
@@ -34,8 +36,7 @@ namespace Memory
             MWindow.Content = menuRootGrid; //Switch between menu and game screens
 
             // Generating a new state is this easy!!!!!!!!
-            State state = new State(new string[]{"jack", "jeff"}, Constant.Height, Constant.Width, @"Images/");
-           
+            var state = new State(new[]{"jack", "jeff"}, Constant.Height, Constant.Width, @"Images/");
         }
 
         /// <summary>
@@ -44,8 +45,6 @@ namespace Memory
         /// <param name="rootGrid">Grid to put playgrid into</param>
         private static void GeneratePlayGrid(Grid rootGrid)
         {
-            var playingInfo = new Grid {Name = "PlayingInfo", ShowGridLines = true};
-
             CardGrid = GameLogic.FillCardGrid(GameBoard, GameLogic.GenerateCardGrid());
 
             var col2 = new ColumnDefinition {Width = new GridLength(2, GridUnitType.Star)};
@@ -55,8 +54,55 @@ namespace Memory
             rootGrid.ColumnDefinitions.Add(col1);
             rootGrid.Children.Add(CardGrid);
 
+            var playingInfo = new StackPanel{ Name = "PlayingInfo", VerticalAlignment = VerticalAlignment.Center};
             rootGrid.Children.Add(playingInfo);
             Grid.SetColumn(playingInfo, 1);
+
+            var margin = new System.Windows.Thickness(10);
+
+            var player1Name = new TextBlock
+            {
+                Text = new Player("Player 1").Name,
+                Foreground = new SolidColorBrush(Colors.Blue),
+                TextAlignment = TextAlignment.Center,
+                FontSize = 16
+            };
+            var player2Name = new TextBlock
+            {
+                Text = new Player("Player 2").Name,
+                Foreground = new SolidColorBrush(Colors.Black),
+                TextAlignment = TextAlignment.Center,
+                FontSize = 16
+            };
+
+            var player1Score = new TextBlock
+            {
+                Text = new Player("Player 1").Score.ToString(),
+                Foreground = new SolidColorBrush(Colors.Blue),
+                TextAlignment = TextAlignment.Center,
+                Margin = margin,
+                FontSize = 16
+            };
+            var player2Score = new TextBlock
+            {
+                Text = new Player("Player 2").Score.ToString(),
+                Foreground = new SolidColorBrush(Colors.Black),
+                TextAlignment = TextAlignment.Center,
+                Margin = margin,
+                FontSize = 16
+            };
+
+            playingInfo.Children.Add(player1Name);
+            playingInfo.Children.Add(player1Score);
+            playingInfo.Children.Add(player2Name);
+            playingInfo.Children.Add(player2Score);
+
+            var opslaanKnop = new Button{Content = "Spel opslaan", Margin = margin, FontSize = 14};
+            var resetKnop = new Button{Content = "Spel resetten", Margin = margin, FontSize = 14 };
+
+            playingInfo.Children.Add(opslaanKnop);
+            playingInfo.Children.Add(resetKnop);
+
         }
 
         /// <summary>
@@ -72,24 +118,28 @@ namespace Memory
             rootGrid.ColumnDefinitions.Add(col1);
 
             var menuButtonGrid = new Grid {Name = "MenuButtonGrid", ShowGridLines = true};
-            //var highscoresGrid = new DataGrid {Name = "HighscoresGrid"};
-            //rootGrid.Children.Add(highscoresGrid);
+
             rootGrid.Children.Add(menuButtonGrid);
             Grid.SetColumn(menuButtonGrid, 1);
 
             var panel = new StackPanel{ Focusable = true, VerticalAlignment = VerticalAlignment.Center, Name = "ButtonPanel"};
             menuButtonGrid.Children.Add(panel);
 
-            var startbtn = new Button {Content = "Start"};
+            #region define buttons
+
+            var startbtn = new Button { Content = "Start" };
             startbtn.Click += PreStartbtn_Click;
 
-            var continueBtn = new Button {Content = "Continue" };
+            var continueBtn = new Button { Content = "Continue" };
 
             var highscorebtn = new Button { Content = "Highscore" };
             highscorebtn.Click += Highscorebtn_Click;
 
             var exitBtn = new Button { Content = "Exit" };
             exitBtn.Click += Exitbtn_Click;
+
+
+            #endregion
 
             panel.Children.Add(startbtn);
             panel.Children.Add(continueBtn);
@@ -115,7 +165,6 @@ namespace Memory
             var menuRootGrid = new Grid { Name = "MenuRootGrid", ShowGridLines = true };
             GenerateMenuGrid(menuRootGrid);
             menuRootGrid.Children.Add(optionGrid);
-
 
             var optionPanel = new StackPanel{VerticalAlignment = VerticalAlignment.Center};
             var name1Block = new TextBlock{Text = "Speler 1 naam:"};
