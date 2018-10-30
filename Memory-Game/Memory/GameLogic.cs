@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -54,7 +53,6 @@ namespace Memory
         /// <param name="cardGrid"></param>
         private static void UnflipAllCards(Hashtable[,] gameBoard, Panel cardGrid)
         {
-            Thread.Sleep(1000);
             for (var i = 0; i < 4; i++)
             for (var j = 0; j < 4; j++)
                 if ((bool) gameBoard[i, j]["Flipped"] && !(bool) gameBoard[i, j]["Found"])
@@ -66,8 +64,7 @@ namespace Memory
                     cardGrid.Children.Add(btn);
                     Grid.SetRow(btn, i);
                     Grid.SetColumn(btn, j);
-
-                    }
+                }
         }
 
         /// <summary>
@@ -150,7 +147,7 @@ namespace Memory
         /// <returns>New grid</returns>
         public static Grid GenerateCardGrid()
         {
-            var cardGrid = new Grid { Name = "CardGrid", ShowGridLines = true};
+            var cardGrid = new Grid {Name = "CardGrid", ShowGridLines = true};
 
             AddColumns(cardGrid, 4);
             AddRows(cardGrid, 4);
