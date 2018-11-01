@@ -3,6 +3,8 @@ using System.Collections;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Threading;
+using System.Threading;
 
 namespace Memory
 {
@@ -21,6 +23,9 @@ namespace Memory
         /// </summary>
         public static Grid CardGrid;
 
+        public static State state;
+        public static MainWindow control;
+
         /// <summary>
         ///     Start of the program, makes calls to functions to:
         ///     make a new shuffled matrix * 6 and print them out 1 by 1.
@@ -36,7 +41,11 @@ namespace Memory
             MWindow.Content = menuRootGrid; //Switch between menu and game screens
 
             // Generating a new state is this easy!!!!!!!!
-            var state = new State(new[]{"jack", "jeff"}, Constant.Height, Constant.Width, @"Images/");
+            state = new State(new[]{"jack", "jeff"}, Constant.Height, Constant.Width, @"Images/");
+            Grid DemoGrid = StateManagement.GenerateGrid(state);
+            MWindow.Content = DemoGrid; // undo UI changes by commenting this line
+            control = this;
+
         }
 
         /// <summary>
