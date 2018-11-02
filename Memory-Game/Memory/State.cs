@@ -335,7 +335,7 @@ namespace Memory
         {
             State state = MainWindow.state;
             cardVector vector = (cardVector)(sender as Image).Tag;
-
+            var gameRootGrid = new Grid { Name = "GameRootGrid", ShowGridLines = true };
             // fail safe to prevent multiple cards from being clicked;
             List<cardVector> raceCheck = state.Table.GetFlippedCards();
             if (raceCheck.Count == 2)
@@ -347,7 +347,8 @@ namespace Memory
             /// flip card
             state.Table._cards[vector.Y, vector.X].Flipped = true;
             // redraw user interface
-            MainWindow.control.Content = StateManagement.GenerateGrid(state);
+            MainWindow.GeneratePlayGrid(gameRootGrid);
+            MainWindow.control.Content = gameRootGrid;
             await logicDelay(); // wait a while before we evaluate cards to let users see their pick.
 
             // check flipped cards
@@ -374,8 +375,9 @@ namespace Memory
                 Trace.WriteLine("Current player:" + state.Players[state.CurrentPlayer].Name);
             }
 
-
-            MainWindow.control.Content = StateManagement.GenerateGrid(state);
+            gameRootGrid = new Grid { Name = "GameRootGrid", ShowGridLines = true };
+            MainWindow.GeneratePlayGrid(gameRootGrid);
+            MainWindow.control.Content = gameRootGrid;
 
             async Task logicDelay()
             {

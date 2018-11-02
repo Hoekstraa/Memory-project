@@ -26,6 +26,9 @@ namespace Memory
         public static State state;
         public static MainWindow control;
 
+        // workaround lol
+        private TextBox Name1 = null;
+        private TextBox Name2 = null;
         /// <summary>
         ///     Start of the program, makes calls to functions to:
         ///     make a new shuffled matrix * 6 and print them out 1 by 1.
@@ -41,9 +44,9 @@ namespace Memory
             MWindow.Content = menuRootGrid; //Switch between menu and game screens
 
             // Generating a new state is this easy!!!!!!!!
-            state = new State(new[]{"jack", "jeff"}, Constant.Height, Constant.Width, @"Images/");
-            Grid DemoGrid = StateManagement.GenerateGrid(state);
-            MWindow.Content = DemoGrid; // undo UI changes by commenting this line
+            //state = new State(new[]{"jack", "jeff"}, Constant.Height, Constant.Width, @"Images/");
+            //Grid DemoGrid = StateManagement.GenerateGrid(state);
+            //MWindow.Content = DemoGrid; // undo UI changes by commenting this line
             control = this;
 
         }
@@ -52,9 +55,9 @@ namespace Memory
         ///     Generates the grid the game is played in
         /// </summary>
         /// <param name="rootGrid">Grid to put playgrid into</param>
-        private static void GeneratePlayGrid(Grid rootGrid)
+        public static void GeneratePlayGrid(Grid rootGrid)
         {
-            CardGrid = GameLogic.FillCardGrid(GameBoard, GameLogic.GenerateCardGrid());
+            CardGrid = StateManagement.GenerateGrid(MainWindow.state);
 
             var col2 = new ColumnDefinition {Width = new GridLength(2, GridUnitType.Star)};
             var col1 = new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star)};
@@ -71,14 +74,14 @@ namespace Memory
 
             var player1Name = new TextBlock
             {
-                Text = new Player("Player 1").Name,
+                Text = state.Players[0].Name,
                 Foreground = new SolidColorBrush(Colors.Blue),
                 TextAlignment = TextAlignment.Center,
                 FontSize = 16
             };
             var player2Name = new TextBlock
             {
-                Text = new Player("Player 2").Name,
+                Text = state.Players[1].Name,
                 Foreground = new SolidColorBrush(Colors.Black),
                 TextAlignment = TextAlignment.Center,
                 FontSize = 16
@@ -86,7 +89,7 @@ namespace Memory
 
             var player1Score = new TextBlock
             {
-                Text = new Player("Player 1").Score.ToString(),
+                Text = state.Players[0].Score.ToString(),
                 Foreground = new SolidColorBrush(Colors.Blue),
                 TextAlignment = TextAlignment.Center,
                 Margin = margin,
@@ -94,7 +97,7 @@ namespace Memory
             };
             var player2Score = new TextBlock
             {
-                Text = new Player("Player 2").Score.ToString(),
+                Text = state.Players[1].Score.ToString(),
                 Foreground = new SolidColorBrush(Colors.Black),
                 TextAlignment = TextAlignment.Center,
                 Margin = margin,
@@ -158,6 +161,7 @@ namespace Memory
 
         private void Startbtn_Click(object sender, RoutedEventArgs e)
         {
+            state = new State(new[] { this.Name1.Text, this.Name2.Text }, Constant.Height, Constant.Width, @"Images/");
             var gameRootGrid = new Grid { Name = "GameRootGrid", ShowGridLines = true };
             GeneratePlayGrid(gameRootGrid);
             MWindow.Content = gameRootGrid;
@@ -179,11 +183,13 @@ namespace Memory
             var name1Block = new TextBlock{Text = "Speler 1 naam:"};
             optionPanel.Children.Add(name1Block);
             var name1Box = new TextBox {Name = "Name1box"};
+            this.Name1 = name1Box;
             optionPanel.Children.Add(name1Box);
 
             var name2Block = new TextBlock { Text = "Speler 2 naam:" };
             optionPanel.Children.Add(name2Block);
             var name2Box = new TextBox { Name = "Name2box" };
+            this.Name2 = name2Box;
             optionPanel.Children.Add(name2Box);
 
             var actualstartbtn = new Button{Content = "Start game"};
