@@ -368,6 +368,13 @@ namespace Memory
                     state.Table._cards[flipped[0].Y, flipped[0].X].Flipped = false;
                     state.Table._cards[flipped[1].Y, flipped[1].X].Flipped = false;
                 }
+                if (state.Players[0].Score + state.Players[1].Score == 8)
+                {
+                    var hoogsteScore = Math.Max(state.Players[0].Score, state.Players[1].Score);
+                    var laagsteScore = Math.Min(state.Players[0].Score, state.Players[1].Score);
+
+                    MessageBox.Show($"De hoogste score is {hoogsteScore}\nDe Laagste score is {laagsteScore}");
+                }
                 for (int i = 0; i < state.Players.Count; i++)
                 {
                     Trace.WriteLine("Player: " + state.Players[i].Name + " Score:" + state.Players[i].Score);

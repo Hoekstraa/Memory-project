@@ -103,6 +103,16 @@ namespace Memory
                 Margin = margin,
                 FontSize = 16
             };
+            var currentplayer = new TextBlock
+            {
+                Text = state.Players[state.CurrentPlayer].Name + " is aan de beurt",
+                Foreground = new SolidColorBrush(Colors.Black),
+                TextAlignment = TextAlignment.Center,
+                Margin = margin,
+                FontSize = 16
+            };
+            
+            playingInfo.Children.Add(currentplayer);
 
             playingInfo.Children.Add(player1Name);
             playingInfo.Children.Add(player1Score);
@@ -111,9 +121,12 @@ namespace Memory
 
             var opslaanKnop = new Button{Content = "Spel opslaan", Margin = margin, FontSize = 14};
             var resetKnop = new Button{Content = "Spel resetten", Margin = margin, FontSize = 14 };
+            var terugKnop = new Button { Content = "Terug naar het hoofdmenu", Margin = margin, FontSize = 14 };
+            terugKnop.Click += control.TerugKnop_Click;
 
             playingInfo.Children.Add(opslaanKnop);
             playingInfo.Children.Add(resetKnop);
+            playingInfo.Children.Add(terugKnop);
 
         }
 
@@ -207,6 +220,13 @@ namespace Memory
             var menuRootGrid = new Grid { Name = "MenuRootGrid", ShowGridLines = true };
             GenerateMenuGrid(menuRootGrid);
             menuRootGrid.Children.Add(highscoresGrid);
+            MWindow.Content = menuRootGrid;
+        }
+
+        private void TerugKnop_Click(object sender, RoutedEventArgs e)
+        {
+            var menuRootGrid = new Grid { Name = "MenuRootGrid", ShowGridLines = true };
+            GenerateMenuGrid(menuRootGrid);
             MWindow.Content = menuRootGrid;
         }
 
