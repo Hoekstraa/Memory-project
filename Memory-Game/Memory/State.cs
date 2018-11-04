@@ -30,6 +30,15 @@ namespace Memory
             CurrentPlayer = 0;
            
         }
+        public Player HighestScoringPlayer()
+        {
+            var highest = new Player("Geen");
+            foreach (Player p in Players)
+            {
+                if (p.Score > highest.Score) { highest.Score = p.Score; }
+            }
+            return highest;
+        }
     }
 
     /// <summary>
@@ -373,7 +382,7 @@ namespace Memory
                     var hoogsteScore = Math.Max(state.Players[0].Score, state.Players[1].Score);
                     var laagsteScore = Math.Min(state.Players[0].Score, state.Players[1].Score);
 
-                    MessageBox.Show($"De hoogste score is {hoogsteScore}\nDe Laagste score is {laagsteScore}");
+                    MessageBox.Show($"{state.HighestScoringPlayer().Name} heeft de hoogste score met {state.HighestScoringPlayer().Score} punten! \n\n  De hoogste score is {hoogsteScore}\nDe Laagste score is {laagsteScore}");
                 }
                 for (int i = 0; i < state.Players.Count; i++)
                 {
