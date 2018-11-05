@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -43,7 +42,7 @@ namespace Memory
         ///     Generates the grid the game is played in
         /// </summary>
         /// <param name="rootGrid">Grid to put playgrid into</param>
-        private static void GeneratePlayGrid(Grid rootGrid)
+        private void GeneratePlayGrid(Grid rootGrid)
         {
             CardGrid = GameLogic.FillCardGrid(GameBoard, GameLogic.GenerateCardGrid());
 
@@ -99,9 +98,12 @@ namespace Memory
 
             var opslaanKnop = new Button{Content = "Spel opslaan", Margin = margin, FontSize = 14};
             var resetKnop = new Button{Content = "Spel resetten", Margin = margin, FontSize = 14 };
+            var terugKnop = new Button {Content = "terug"};
+            terugKnop.Click += TerugKnop_Click;
 
             playingInfo.Children.Add(opslaanKnop);
             playingInfo.Children.Add(resetKnop);
+            playingInfo.Children.Add(terugKnop);
 
         }
 
@@ -137,7 +139,6 @@ namespace Memory
 
             var exitBtn = new Button { Content = "Exit" };
             exitBtn.Click += Exitbtn_Click;
-
 
             #endregion
 
@@ -192,6 +193,13 @@ namespace Memory
             var menuRootGrid = new Grid { Name = "MenuRootGrid", ShowGridLines = true };
             GenerateMenuGrid(menuRootGrid);
             menuRootGrid.Children.Add(highscoresGrid);
+            MWindow.Content = menuRootGrid;
+        }
+
+        private void TerugKnop_Click(object sender, RoutedEventArgs e)
+        {
+            var menuRootGrid = new Grid { Name = "MenuRootGrid", ShowGridLines = true };
+            GenerateMenuGrid(menuRootGrid);
             MWindow.Content = menuRootGrid;
         }
 

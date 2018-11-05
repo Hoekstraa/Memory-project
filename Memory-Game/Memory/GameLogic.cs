@@ -2,9 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace Memory
@@ -23,6 +23,7 @@ namespace Memory
         /// <param name="cardGrid">UI element to revolve card in</param>
         public static void RevolveCard(int row, int column, Hashtable[,] gameBoard, Grid cardGrid)
         {
+            Trace.WriteLine("Revolving card");
             var btn = new Button();
             Image x;
             if ((bool)gameBoard[row, column]["Flipped"])
@@ -39,8 +40,8 @@ namespace Memory
             }
 
             btn.Click += Btn_Click;
-            cardGrid.Children.Add(btn);
             cardGrid.Children.Remove(GetGridElement(cardGrid, row, column));
+            cardGrid.Children.Add(btn);
             Grid.SetRow(btn, row);
             Grid.SetColumn(btn, column);
         }
@@ -53,6 +54,8 @@ namespace Memory
         /// <param name="cardGrid"></param>
         private static void UnflipAllCards(Hashtable[,] gameBoard, Panel cardGrid)
         {
+            Thread.Sleep(1000);
+            Trace.WriteLine("Unflipping all cards");
             for (var i = 0; i < 4; i++)
             for (var j = 0; j < 4; j++)
                 if ((bool) gameBoard[i, j]["Flipped"] && !(bool) gameBoard[i, j]["Found"])
@@ -165,10 +168,7 @@ namespace Memory
         {
             var simpleImage = new Image
             {
-                Width = 200, Margin = new Thickness(5),
-                VerticalAlignment = VerticalAlignment.Stretch,
-                HorizontalAlignment = HorizontalAlignment.Stretch,
-                Stretch = Stretch.UniformToFill
+                Width = 200, Margin = new Thickness(5)
             };
 
             var bi = new BitmapImage();
